@@ -101,3 +101,5 @@ app.post("/Form", async (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor activo en ${port}: http://localhost:${port}`);
 });
+
+module.exports = app;
