@@ -1,0 +1,80 @@
+<!-- ISMAEL VALENZUELA MAÑAS -->
+<!-- 20-10-2024
+Disponer un cuadro de texto que solo admita números y que, tras pulsar un botón anexo, cree al principio de la página tantos párrafos como el número que se haya introducido.
+
+Colocar tras los párrafos creados un cuadro de texto en el que introduzcas, como máximo, el número de párrafos que se encuentren creados, para -tras la pulsación de otro botón - se proceda a su eliminación. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="parrafos" name="parrafos" class="parrafos"></div>
+    <input
+      type="number"
+      class="input"
+      id="inputNumb"
+      name="inputNumb"
+      placeholder="Introduce un número"
+    />
+    <button onclick="crearParrafos()">Crear párrafos</button>
+    <input
+      type="number"
+      class="input"
+      id="inputElim"
+      name="inputElim"
+      placeholder="Número de párrafos a eliminar"
+    />
+    <button onclick="eliminarParrafos()">Eliminar párrafos</button>
+    <script>
+      const parrafosDiv = document.getElementById("parrafos");
+      let parrafoCounter = 0;
+
+      const crearParrafos = () => {
+        const inputNum = document.getElementById("inputNumb");
+        const numParrafos = parseInt(inputNum.value);
+
+        if (isNaN(numParrafos) || numParrafos <= 0) {
+          alert("Por favor, introduce un número válido.");
+          return;
+        }
+
+        for (let i = 0; i < numParrafos; i++) {
+          parrafoCounter++;
+          const parrafo = document.createElement("p");
+          const texto = document.createTextNode(`Párrafo ${parrafoCounter}`);
+          parrafo.appendChild(texto);
+          parrafosDiv.insertBefore(parrafo, parrafosDiv.firstChild);
+        }
+
+        inputNum.value = "";
+      };
+
+      const eliminarParrafos = () => {
+        const inputElim = document.getElementById("inputElim");
+        const eliminarNumParrafos = parseInt(inputElim.value);
+
+        if (isNaN(eliminarNumParrafos) || eliminarNumParrafos <= 0) {
+          alert("Por favor, introduce un número válido.");
+          return;
+        }
+
+        const parrafos = parrafosDiv.getElementsByTagName("p");
+        if (eliminarNumParrafos > parrafos.length) {
+          alert("No hay suficientes párrafos para eliminar.");
+          return;
+        }
+
+        for (let i = 0; i < eliminarNumParrafos; i++) {
+          parrafosDiv.removeChild(parrafos[0]);
+          parrafoCounter--;
+        }
+
+        inputElim.value = "";
+      };
+    </script>
+  </body>
+</html>

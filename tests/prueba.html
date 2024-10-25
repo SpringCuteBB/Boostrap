@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <button id="abrir-ventana">CREAR</button>
+      <button id="cerrar-ventana">CERRAR</button>
+    </div>
+    <script>
+      //   function MoverVentana() {
+      //     ventana.moveBy(5, 5);
+      //     i++;
+      //     if (i < 50) {
+      //       setTimeout(MoverVentana, 20);
+      //     } else {
+      //       ventana.close();
+      //     }
+      //   }
+
+      //   let opciones = "left=100,top=100,width=500,height=500",
+      //     i = 0;
+      //     window.onload = function () {
+      //       ventana = window.open("", "", opciones);
+      //         ventana.document.write("Prueba");
+      //         ventana.moveTo(400, 100);
+      //         MoverVentana();
+      //     };
+
+      let googleVentana = null;
+      const Init = () => {
+        const abrirBtn = document.getElementById("abrir-ventana");
+        const cerrarBtn = document.getElementById("cerrar-ventana");
+
+        if (abrirBtn && cerrarBtn) {
+          abrirBtn.onclick = AbrirVent;
+          cerrarBtn.onclick = CerrarVent;
+        }
+      };
+      const AbrirVent = () => {
+        googleVentana = window.open("", "Google", "width=300, height=500");
+        googleVentana.location.href = "https://www.google.com";
+      };
+      const CerrarVent = () => {
+        if (googleVentana && !googleVentana.closed) {
+          googleVentana.close();
+          googleVentana = null;
+        }
+      };
+
+      window.onload = Init;
+    </script>
+  </body>
+</html>

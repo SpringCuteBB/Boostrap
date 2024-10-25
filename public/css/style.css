@@ -1,0 +1,466 @@
+:root {
+  --chocolate: #281d10;
+  --darkerchocolate: #1e140c;
+  --sweet: #d1f3f2;
+  --darkersweet: #b7e4e2;
+  --pink: #eb90c2;
+  --darkerpink: #d97ab0;
+  --main: #ef4a7c;
+  --darkermain: #e33e6f;
+  --white: #fff;
+  --darkerwhite: #f2f2f2;
+}
+@font-face {
+  font-family: "Bulleto";
+  src: url("/css/fonts/Bulletto-Killa.ttf");
+}
+@font-face {
+  font-family: "Ambery Garden";
+  src: url("/css/fonts/AmberyGardenRegular-PKjGd.ttf");
+}
+@keyframes shake {
+  0% {
+    transform: rotate(15deg) scale(1);
+  }
+  10% {
+    transform: rotate(-15deg) scale(1.05);
+  }
+  20% {
+    transform: rotate(10deg) scale(1.1);
+  }
+  30% {
+    transform: rotate(-10deg) scale(1.05);
+  }
+  40% {
+    transform: rotate(5deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(-5deg) scale(1.05);
+  }
+  60% {
+    transform: rotate(3deg) scale(1.1);
+  }
+  70% {
+    transform: rotate(-3deg) scale(1.05);
+  }
+  80% {
+    transform: rotate(2deg) scale(1.1);
+  }
+  90% {
+    transform: rotate(-2deg) scale(1.05);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  75% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.content {
+  padding-bottom: 150px;
+}
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+html {
+  scroll-behavior: smooth;
+}
+.icon-nav img:hover {
+  animation: scale 1s infinite;
+}
+nav {
+  background-image: url("/src/fondo-nav-img.png");
+  background-size: cover;
+  background-clip: border-box;
+  z-index: 1000;
+}
+.cart-icon {
+  position: absolute;
+  right: 25px;
+  top: calc(100% - 70px);
+  transform: translateY(-50%);
+  background-color: var(--chocolate);
+  padding: 20px;
+  border-radius: 0.5em;
+}
+.cart-icon:hover {
+  transition: 0.5s;
+  background-color: var(--darkerchocolate);
+  cursor: pointer;
+}
+.nav-direcciones,
+.nav-direcciones-actual {
+  font-family: "Ambery Garden";
+  font-size: 1.2em;
+  padding-top: 15px;
+  margin-left: 10px;
+  padding-bottom: 3px;
+  border-bottom: 3px solid transparent;
+}
+.nav-direcciones:hover,
+.nav-direcciones-actual {
+  transition: 0.2s;
+  box-sizing: border-box;
+}
+
+.nav-direcciones:hover {
+  border-bottom: 3px solid var(--pink);
+  border-radius: 20%;
+}
+.main-text {
+  color: var(--main);
+}
+.not-margin {
+  margin: 0px !important;
+}
+.chocolate-text {
+  color: var(--chocolate);
+}
+.white-text {
+  color: var(--white) !important;
+  font-size: 115%;
+}
+.custom-button-pedido,
+.custom-button-contacto {
+  background-color: var(--pink);
+  border: none;
+  font-family: "Ambery Garden";
+  padding: 9px;
+  margin-left: 30px;
+}
+
+.custom-button-pedido:hover,
+.custom-button-contacto:hover {
+  background-color: var(--main);
+}
+
+.custom-button-contacto {
+  margin-left: 0px !important;
+  width: 100px;
+  margin-bottom: 20px;
+}
+.custom-button-pedido:focus,
+.custom-button-pedido:active,
+.custom-button-pedido:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  background-color: var(--main) !important;
+}
+.custom-button-pedido:active {
+  background-color: var(--main) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+#navbar-toggler-icon {
+  background-image: url("/src/SVG/menu-nav-icon.svg") !important;
+}
+#navbar-toggler-icon-active {
+  background-image: url("/src/SVG/menu-nav-icon-active.svg") !important;
+}
+.navbar-toggler {
+  border: none;
+}
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+.shake {
+  animation: shake 0.8s;
+}
+p {
+  font-family: "Bulleto";
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Ambery Garden";
+}
+a {
+  outline: none;
+  text-decoration: none;
+  font-family: "Bulleto";
+  color: var(--darkermain) !important;
+}
+a:hover {
+  transition: 0.1s;
+  color: var(--main) !important;
+}
+.full-screen-section {
+  position: relative;
+  width: 100%;
+  height: 120vh;
+  background: url("/src/images/sweet-pastry-assortment-top-view.jpg") no-repeat
+    center center;
+  background-size: cover;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+.full-screen-section .content {
+  z-index: 1;
+}
+.full-screen-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #281d10a4;
+  backdrop-filter: blur(5px);
+  z-index: 0;
+}
+.copy-text {
+  font-family: "Bulleto";
+  color: white;
+  letter-spacing: 2px;
+  font-size: 200%;
+}
+.olas {
+  background-image: url("/src/SVG/olas.svg");
+  background-repeat: repeat-x;
+  z-index: 1;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+}
+.olas2 {
+  background-image: url("/src/SVG/olas2.svg");
+  background-repeat: repeat-x;
+  z-index: 1;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+}
+.olas3 {
+  background-image: url("/src/SVG/olas3.svg");
+  background-repeat: repeat-x;
+  z-index: 1;
+  height: 100px;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  margin-top: 150px;
+}
+.olas4 {
+  background-image: url("/src/SVG/olas4.svg");
+  background-repeat: repeat-y;
+  z-index: 1;
+  position: relative;
+  height: 100%;
+  left: calc(0% - 14px);
+  width: 100px;
+}
+.olas4-responsive {
+  display: none;
+  background-image: url("/src/SVG/olas4-responsive.svg");
+  background-repeat: repeat-x;
+  z-index: 1;
+  position: relative;
+  top: calc(0% - 2px);
+  width: calc(100% + 12px);
+  height: 100px;
+}
+.container-contactos {
+  margin-top: 150px;
+}
+.formulario {
+  width: 70%;
+}
+.section2 {
+  background-color: var(--white);
+  margin-bottom: 200px;
+}
+#preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+.bg-chocolate {
+  background-color: var(--chocolate);
+}
+.bg-pink {
+  background-color: var(--pink) !important;
+}
+.about-screen-section-img {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+.imagen-contactos {
+  position: relative;
+  overflow: hidden;
+}
+.imagen-contactos::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/src/images/sweet-pastry-assortment-top-view.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: blur(5px);
+  z-index: -1;
+}
+
+.about-screen-section-img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/src/images/sweet-pastry-assortment-top-view.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: blur(5px);
+  z-index: -1;
+}
+.quienes-somos-section {
+  background-color: var(--main);
+  width: 100%;
+  padding-bottom: 230px;
+}
+input {
+  border: none !important;
+  border-bottom: 2px solid var(--chocolate) !important;
+  border-radius: 0px !important;
+  font-family: "sans-serif";
+}
+input::placeholder {
+  color: #d6d6d6 !important;
+}
+input:focus {
+  transition: 0.2s;
+  border-bottom: 2px solid var(--main) !important;
+  box-shadow: none !important;
+}
+label {
+  font-family: "Ambery Garden";
+  color: var(--chocolate);
+  margin-top: 15px;
+  font-size: 120%;
+}
+textarea {
+  border: 2px solid var(--chocolate) !important;
+  border-radius: 0px !important;
+  font-family: "sans-serif";
+}
+textarea::placeholder {
+  color: #d6d6d6 !important;
+}
+textarea:focus {
+  transition: 0.2s;
+  border: 2px solid var(--main) !important;
+  box-shadow: none !important;
+}
+.error {
+  color: red;
+  font-family: "sans-serif";
+  font-size: 90%;
+}
+
+/* BARRA DE NAVEGACION */
+@media (max-width: 991px) {
+  .custom-button-pedido {
+    margin-left: 0px !important;
+    width: 100%;
+  }
+  .custom-button-contacto {
+    margin-left: 0px !important;
+    width: 100%;
+    height: 60px;
+    margin-top: 50px;
+  }
+  .nav-direcciones {
+    font-family: "Ambery Garden";
+    font-size: 1.2em;
+    padding-top: 15px;
+    margin-left: 10px;
+    padding-bottom: 3px;
+    border-bottom: 3px solid transparent;
+  }
+  .nav-direcciones {
+    border: none;
+  }
+  .nav-direcciones:hover {
+    border: none;
+  }
+  .icon-nav {
+    margin-left: calc(50% - 20px);
+  }
+  .letras-cuerpo {
+    width: 300px;
+    height: 150px;
+  }
+  .copy-text {
+    font-size: 150%;
+  }
+  .olas4 {
+    display: none;
+  }
+  .olas4-responsive {
+    display: block;
+  }
+  .formulario {
+    width: 100%;
+  }
+}
+
+@media (max-width: 300px) {
+  .letras-cuerpo {
+    display: none;
+  }
+}

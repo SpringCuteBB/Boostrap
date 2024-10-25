@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1></h1>
+    <script>
+      let d = document;
+      //let h1 = d.body.childNodes[1];
+      //let h1 = d.querySelectorAll("h1")[0];
+      let h1 = d.getElementsByTagName("h1")[0];
+      let textoAdd = document.createTextNode("10");
+      h1.appendChild(textoAdd);
+      let contenido = parseInt(h1.textContent);
+      contenido += 5;
+      let textoh1 = h1.childNodes[0];
+      textoh1.nodeValue = contenido;
+    </script>
+  </body>
+</html>

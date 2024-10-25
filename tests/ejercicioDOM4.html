@@ -1,0 +1,50 @@
+<!-- ISMAEL VALENZUELA MAÑAS -->
+<!-- 20-10-2024
+Se debe crear una página que contenga un div con 5 párrafos.
+Tendrá un botón que, al presionarlo, se creará antes de ese div un nuevo párrafo. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="parrafos" name="parrafos" class="parrafos">
+      <p>parrafo 1</p>
+      <p>parrafo 2</p>
+      <p>parrafo 3</p>
+      <p>parrafo 4</p>
+      <p>parrafo 5</p>
+    </div>
+    <button onclick="createParrafo('parrafo 6')">Crear parrafo</button>
+    <input
+      type="text"
+      class="input"
+      id="input"
+      name="input"
+      placeholder="Inserta el texto del parrafo."
+    />
+    <script>
+      const parrafosDiv =
+        document.getElementById("parrafos") ||
+        document.getElementsByName("parrafos") ||
+        document.getElementsByClassName("parrafos");
+      const inputTexto =
+        document.getElementById("input") ||
+        document.getElementsByName("input") ||
+        document.getElementsByClassName("input");
+
+      const createParrafo = () => {
+        if (!inputTexto.value) {
+          return;
+        }
+        const parrafo = document.createElement("p");
+        const texto = document.createTextNode(inputTexto.value);
+        parrafo.appendChild(texto);
+        document.body.insertBefore(parrafo, parrafosDiv);
+      };
+    </script>
+  </body>
+</html>
