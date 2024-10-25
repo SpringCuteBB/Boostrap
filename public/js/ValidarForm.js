@@ -25,12 +25,13 @@ const showModalErrors = (errors) => {
 const validateForm = () => {
   let isValid = true;
   const errors = [];
-  const name = d.getElementById("name");
-  const email = d.getElementById("email");
-  const subject = d.getElementById("subject");
-  const message = d.getElementById("message");
+  const name = document.getElementById("name");
+  const email = document.getElementById("email");
+  const subject = document.getElementById("subject");
+  const message = document.getElementById("message");
+  const terms = document.getElementById("terms");
 
-  d.querySelectorAll(".error").forEach((error) => error.remove());
+  document.querySelectorAll(".error").forEach((error) => error.remove());
 
   if (name.value.trim() === "") {
     const error = createErrorDom("El nombre es obligatorio.");
@@ -62,6 +63,13 @@ const validateForm = () => {
     const error = createErrorDom("El mensaje es obligatorio.");
     message.closest(".mb-3").appendChild(error);
     errors.push("El mensaje es obligatorio.");
+    isValid = false;
+  }
+
+  if (!terms.checked) {
+    const error = createErrorDom("Debe aceptar los términos y condiciones.");
+    terms.closest(".mb-3").appendChild(error);
+    errors.push("Debe aceptar los términos y condiciones.");
     isValid = false;
   }
 

@@ -396,6 +396,17 @@ label {
   margin-top: 15px;
   font-size: 120%;
 }
+.form-check-input {
+  border: solid 2px var(--chocolate) !important;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.form-check-input:checked {
+  background-color: var(--main) !important;
+  border: solid 2px var(--main) !important;
+}
+
 textarea {
   border: 2px solid var(--chocolate) !important;
   border-radius: 0px !important;
