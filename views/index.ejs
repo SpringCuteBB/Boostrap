@@ -16,7 +16,7 @@
     <div id="preloader">
       <div class="spinner"></div>
     </div>
-    <!-- BARRA DE NAVEGACION -->
+        <!-- BARRA DE NAVEGACION -->
     <nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand icon-nav" href="<%= route('home')%>">
@@ -52,11 +52,41 @@
             </li>
             <li class="nav-item">
               <a
-                class="nav-link active nav-direcciones"
+                class="nav-link active nav-direcciones-actual"
                 aria-current="page"
                 href="<%= route('contact')%>"
-                ><span class="chocolate-text">Contáctanos</span></a
+                ><span class="main-text">Contáctanos</span></a
               >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle nav-direcciones"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                ><span class="chocolate-text">Tiendas</span>
+              </a>
+              <ul
+                class="dropdown-menu custom-dropdown-menu"
+                aria-labelledby="navbarDropdown"
+              >
+                <li>
+                  <a
+                    class="dropdown-item nav-sub-direcciones"
+                    href="<%= route('physicalStores')%>"
+                    ><span class="chocolate-text">Físicas</span></a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item nav-sub-direcciones"
+                    href="<%= route('onlineStores')%>"
+                    ><span class="chocolate-text">Online</span></a
+                  >
+                </li>
+              </ul>
             </li>
           </ul>
           <button

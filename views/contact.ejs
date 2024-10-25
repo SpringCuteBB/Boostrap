@@ -58,6 +58,36 @@
                 ><span class="main-text">Contáctanos</span></a
               >
             </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle nav-direcciones"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                ><span class="chocolate-text">Tiendas</span>
+              </a>
+              <ul
+                class="dropdown-menu custom-dropdown-menu"
+                aria-labelledby="navbarDropdown"
+              >
+                <li>
+                  <a
+                    class="dropdown-item nav-sub-direcciones"
+                    href="<%= route('physicalStores')%>"
+                    ><span class="chocolate-text">Físicas</span></a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item nav-sub-direcciones"
+                    href="<%= route('onlineStores')%>"
+                    ><span class="chocolate-text">Online</span></a
+                  >
+                </li>
+              </ul>
+            </li>
           </ul>
           <button
             class="btn btn-primary custom-button-pedido px-4 ms-auto"

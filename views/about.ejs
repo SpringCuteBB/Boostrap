@@ -17,6 +17,7 @@
       <div class="spinner"></div>
     </div>
     <!-- BARRA DE NAVEGACION -->
+    <!-- BARRA DE NAVEGACION -->
     <nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand icon-nav" href="<%= route('home')%>">
@@ -44,19 +45,49 @@
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
               <a
-                class="nav-link active nav-direcciones-actual"
+                class="nav-link active nav-direcciones"
                 aria-current="page"
-                href="<%= route('about')%>""
-                ><span class="main-text">Qué somos</span></a
+                href="<%= route('about')%>"
+                ><span class="chocolate-text">Qué somos</span></a
               >
             </li>
             <li class="nav-item">
               <a
-                class="nav-link active nav-direcciones"
+                class="nav-link active nav-direcciones-actual"
                 aria-current="page"
-                href="<%= route('contact')%>""
-                ><span class="chocolate-text">Contáctanos</span></a
+                href="<%= route('contact')%>"
+                ><span class="main-text">Contáctanos</span></a
               >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle nav-direcciones"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                ><span class="chocolate-text">Tiendas</span>
+              </a>
+              <ul
+                class="dropdown-menu custom-dropdown-menu"
+                aria-labelledby="navbarDropdown"
+              >
+                <li>
+                  <a
+                    class="dropdown-item nav-sub-direcciones"
+                    href="<%= route('physicalStores')%>"
+                    ><span class="chocolate-text">Físicas</span></a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item nav-sub-direcciones"
+                    href="<%= route('onlineStores')%>"
+                    ><span class="chocolate-text">Online</span></a
+                  >
+                </li>
+              </ul>
             </li>
           </ul>
           <button
@@ -77,27 +108,49 @@
     </nav>
     <!-- QUE SOMOS -->
     <section class="about-screen-section-img fade-in">
-        <div class="olas"></div>
+      <div class="olas"></div>
     </section>
     <section class="quienes-somos-section fade-in">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-7 col-md-6 col-sm-12 mb-4 white-text">
-                    <h1 class="text-lg-start text-md-start text-center mb-3"> Qué Somos</h1>
-                    <p class="text-start">En Bunbon, somos apasionados por el arte de la repostería y nos dedicamos a crear experiencias dulces únicas que llegan directamente a tu puerta. Somos una pastelería a domicilio especializada en la personalización de pasteles, diseñados para reflejar tu estilo, tus gustos y cualquier ocasión especial que desees celebrar. Desde cumpleaños hasta aniversarios, o simplemente para darte un capricho, cada uno de nuestros pasteles es una obra de arte creada a medida.
-
-                    Nuestro equipo de pasteleros combina ingredientes de alta calidad con técnicas tradicionales y un toque de innovación, asegurándonos de que cada creación no solo luzca espectacular, sino que también sepa increíble. Nos enorgullece transformar tus ideas en dulces realidades, cuidando cada detalle desde el diseño hasta la entrega.
-
-                    En Bunbon, no hacemos simplemente pasteles; creamos momentos que recuerdas con una sonrisa.</p>
-                </div>
-                <div class="col-lg-5 col-md-6 col-sm-12 d-flex justify-content-center align-items-center mt-5"><!--  ESPACIO EN BLANCO POR SI ACASO -->
-                    <img src="/src/SVG/que-somos-img.svg" alt="Logo Bunbon" width="200" height="200">
-                </div>
-            </div>
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-lg-7 col-md-6 col-sm-12 mb-4 white-text">
+            <h1 class="text-lg-start text-md-start text-center mb-3">
+              Qué Somos
+            </h1>
+            <p class="text-start">
+              En Bunbon, somos apasionados por el arte de la repostería y nos
+              dedicamos a crear experiencias dulces únicas que llegan
+              directamente a tu puerta. Somos una pastelería a domicilio
+              especializada en la personalización de pasteles, diseñados para
+              reflejar tu estilo, tus gustos y cualquier ocasión especial que
+              desees celebrar. Desde cumpleaños hasta aniversarios, o
+              simplemente para darte un capricho, cada uno de nuestros pasteles
+              es una obra de arte creada a medida. Nuestro equipo de pasteleros
+              combina ingredientes de alta calidad con técnicas tradicionales y
+              un toque de innovación, asegurándonos de que cada creación no solo
+              luzca espectacular, sino que también sepa increíble. Nos
+              enorgullece transformar tus ideas en dulces realidades, cuidando
+              cada detalle desde el diseño hasta la entrega. En Bunbon, no
+              hacemos simplemente pasteles; creamos momentos que recuerdas con
+              una sonrisa.
+            </p>
+          </div>
+          <div
+            class="col-lg-5 col-md-6 col-sm-12 d-flex justify-content-center align-items-center mt-5"
+          >
+            <!--  ESPACIO EN BLANCO POR SI ACASO -->
+            <img
+              src="/src/SVG/que-somos-img.svg"
+              alt="Logo Bunbon"
+              width="200"
+              height="200"
+            />
+          </div>
         </div>
-        <div class="olas3"></div>
+      </div>
+      <div class="olas3"></div>
     </section>
-        <!-- Pie de Página -->
+    <!-- Pie de Página -->
     <footer class="text-center text-lg-start bg-pink fade-in">
       <div class="container p-4 mb-5">
         <div class="row">

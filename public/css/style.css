@@ -406,6 +406,24 @@ label {
   background-color: var(--main) !important;
   border: solid 2px var(--main) !important;
 }
+.nav-sub-direcciones:focus,
+.nav-sub-direcciones:active,
+.nav-sub-direcciones:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  background-color: var(--main) !important;
+}
+.custom-dropdown-menu {
+  margin-top: 4px !important;
+  animation: fadeIn 0.5s;
+  border: var(--white) 1px solid;
+  box-shadow: var(--chocolate) 5px 5px 0px 0px !important;
+}
+.nav-sub-direcciones:hover {
+  transition: 0.2s;
+  background-color: var(--pink) !important;
+}
 
 textarea {
   border: 2px solid var(--chocolate) !important;
@@ -445,6 +463,12 @@ textarea:focus {
     margin-left: 10px;
     padding-bottom: 3px;
     border-bottom: 3px solid transparent;
+  }
+  .custom-dropdown-menu {
+    animation: fadeIn 0.5s;
+    border: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
   }
   .nav-direcciones {
     border: none;
