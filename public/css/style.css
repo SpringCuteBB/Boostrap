@@ -387,6 +387,9 @@ input:focus {
   border-bottom: 2px solid var(--main) !important;
   box-shadow: none !important;
 }
+.serius-text {
+  font-family: "sans-serif";
+}
 label {
   font-family: "Ambery Garden";
   color: var(--chocolate);
