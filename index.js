@@ -10,7 +10,7 @@ const port = process.env.PORT; // Usar el puerto proporcionado por el entorno
 const routes = {};
 
 app.set("view engine", "ejs");
-app.set("views", "./views");
+app.set("views", path.join(__dirname, "/views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -102,5 +102,3 @@ app.post("/Form", async (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor activo en ${port}: http://localhost:${port}`);
 });
-
-module.exports = app;
