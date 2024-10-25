@@ -396,6 +396,11 @@ label {
   margin-top: 15px;
   font-size: 120%;
 }
+.form-check:hover,
+.form-check-input:hover,
+.form-check:hover label:hover {
+  cursor: pointer;
+}
 .form-check-input {
   border: solid 2px var(--chocolate) !important;
   width: 20px;
@@ -442,6 +447,18 @@ textarea:focus {
   color: red;
   font-family: "sans-serif";
   font-size: 90%;
+}
+.custom-carousel-indicators {
+  top: 100% !important;
+}
+.custom-carousel-indicators button {
+  background-color: var(--chocolate) !important;
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 100% !important;
+}
+.carousel-control-prev {
+  position: absolute;
 }
 
 /* BARRA DE NAVEGACION */
