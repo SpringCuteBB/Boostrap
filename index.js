@@ -6,10 +6,11 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const port = process.env.PORT || 3000; // Usar el puerto proporcionado por el entorno
+const port = process.env.PORT; // Usar el puerto proporcionado por el entorno
 const routes = {};
 
 app.set("view engine", "ejs");
+app.set("views", "./views");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
