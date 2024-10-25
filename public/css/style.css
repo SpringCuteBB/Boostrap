@@ -214,6 +214,7 @@ a:hover {
   transition: 0.1s;
   color: var(--main) !important;
 }
+
 .full-screen-section {
   position: relative;
   width: 100%;
