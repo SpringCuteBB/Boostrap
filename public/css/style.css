@@ -461,7 +461,19 @@ textarea:focus {
 .carousel-control-prev {
   position: absolute;
 }
-
+.no-margin-left {
+  margin-left: 0px !important;
+}
+.card-body {
+  height: 350px !important;
+}
+.card-text {
+  height: 216px;
+}
+.a {
+  position: relative;
+  bottom: 0;
+}
 /* BARRA DE NAVEGACION */
 @media (max-width: 991px) {
   .custom-button-pedido {
