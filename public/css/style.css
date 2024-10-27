@@ -480,6 +480,9 @@ textarea:focus {
 .carousel-control-prev-icon {
   background-image: url("/src/SVG/arrow-back.svg") !important;
 }
+.card-text {
+  font-family: "sans-serif" !important;
+}
 /* BARRA DE NAVEGACION */
 @media (max-width: 991px) {
   .custom-button-pedido {

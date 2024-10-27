@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BunBon</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="shortcut icon" href="/src/favicon.ico" type="image/x-icon" />
+  </head>
+    <!-- BARRA DE NAVEGACION -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand icon-nav" href="<%= route('home')%>">
+          <img
+            src="/src/SVG/bunbon-logo-icon-nav.svg"
+            alt="Logo"
+            width="40"
+            height="40"
+            class="d-inline-block align-text-top"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          id="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon" id="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link active nav-direcciones"
+                aria-current="page"
+                href="<%= route('about')%>"
+                ><span class="chocolate-text">Qué somos</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active nav-direcciones"
+                aria-current="page"
+                href="<%= route('contact')%>"
+                ><span class="chocolate-text">Contáctanos</span></a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle nav-direcciones-actual"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                ><span class="main-text">Tiendas</span>
+              </a>
+              <ul
+                class="dropdown-menu custom-dropdown-menu"
+                aria-labelledby="navbarDropdown"
+              >
+                <li>
+                  <a
+                    class="dropdown-item nav-sub-direcciones"
+                    href="<%= route('physicalStores')%>"
+                    ><span class="main-text">Físicas</span></a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item nav-sub-direcciones"
+                    href="<%= route('onlineStores')%>"
+                    ><span class="chocolate-text">Online</span></a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <button
+            class="btn btn-primary custom-button-pedido px-4 ms-auto"
+            id="custom-button-pedido"
+          >
+            <img
+              src="/src/SVG/pedido-icon.svg"
+              alt="Buscar"
+              width="25"
+              height="25"
+              class="me-2 pedido-icon"
+            />
+            Haz tu pedido
+          </button>
+        </div>
+      </div>
+    </nav>
+    <!-- CAROUSEL DE CARTAS -->
+    <section
+      class="d-flex justify-content-center align-items-center vh-100"
+      style="width: 286px; margin-left: calc(50% - 140px)"
+    >
+      <div
+        id="carouselExampleIndicators"
+        class="carousel slide"
+        data-bs-ride="carousel"
+        
+      >
+        <div class="carousel-indicators custom-carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="3"
+            aria-label="Slide 4"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="4"
+            aria-label="Slide 5"
+          ></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="card mx-auto" style="width: 18rem">
+              <img
+                src="/src/imagesWebs/ysla.png"
+                class="mb-4 rounded"
+                alt="Característica 1"
+                width="286"
+                height="286"
+                loading="lazy"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Casa Ysla</h5>
+                <p class="card-text">
+                  C. Torre de la Pólvora, 2, Genil, 18007 Granada
+                </p>
+                <a
+                  href="https://www.google.com/maps?hl=es&gl=es&um=1&ie=UTF-8&fb=1&sa=X&ftid=0xd71fb59c335df29:0x360e2a219f5af7"
+                  target="_blank"
+                  class="btn btn-primary custom-button-pedido no-margin-left"
+                  ><span class="white-text">Ir a la web</span></a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card mx-auto" style="width: 18rem">
+              <img
+                src="/src/imagesWebs/lacruzada.png"
+                class="mb-4 rounded"
+                alt="Característica 1"
+                width="286  "
+                height="286"
+                loading="lazy"
+              />
+              <div class="card-body">
+                <h5 class="card-title">La Cruzada</h5>
+                <p class="card-text">
+                  Av. de Dílar, 30, Zaidín, 18007 Granada
+                </p>
+                <a
+                  href="https://www.google.com/maps?hl=es&gl=es&um=1&ie=UTF-8&fb=1&sa=X&ftid=0xd71fca06cebc8c9:0x7de45ace81cc8cf"
+                  target="_blank"
+                  class="btn btn-primary custom-button-pedido no-margin-left"
+                  ><span class="white-text">Ir a la web</span></a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card mx-auto" style="width: 18rem">
+              <img
+                src="/src/imagesWebs/ferga.jpg"
+                class="mb-4 rounded"
+                alt="Característica 1"
+                width="286"
+                height="286"
+                loading="lazy"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Ferga</h5>
+                <p class="card-text">
+                  Av. Andalucía, 92, centro, 18198 Granada
+                </p>
+                <a
+                  href="https://www.google.com/maps/place/Pasteler%C3%ADa+Cafeter%C3%ADa+Panader%C3%ADa+Ferga/@37.1484194,-3.5776509,17z/data=!3m1!4b1!4m6!3m5!1s0xd71e4adbe162155:0xadc9ed327a4b45b6!8m2!3d37.1484194!4d-3.5776509!16s%2Fg%2F11bwzrb20c?hl=es&entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  class="btn btn-primary custom-button-pedido no-margin-left"
+                  ><span class="white-text">Ir a la web</span></a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card mx-auto" style="width: 18rem">
+              <img
+                src="/src/imagesWebs/forumsweet.jpg"
+                class="mb-4 rounded"
+                alt="Característica 1"
+                width="286"
+                height="286"
+                loading="lazy"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Forum Sweet</h5>
+                <p class="card-text">C. la Taha, N° 23, Ronda, 18006 Granada</p>
+                <a
+                  href="https://www.google.com/maps?hl=es&gl=es&um=1&ie=UTF-8&fb=1&sa=X&ftid=0xd71fda9328e6e95:0x89307413f0c839eb"
+                  target="_blank"
+                  class="btn btn-primary custom-button-pedido no-margin-left"
+                  ><span class="white-text">Ir a la web</span></a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card mx-auto" style="width: 18rem">
+              <img
+                src="/src/imagesWebs/lin.png"
+                class="mb-4 rounded"
+                alt="Característica 1"
+                width="286"
+                height="286"
+                loading="lazy"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Pastelería Lin</h5>
+                <p class="card-text">
+                  Zaidín, 18007 Granada
+                </p>
+                <a
+                  href="https://www.google.com/maps?hl=es&gl=es&um=1&ie=UTF-8&fb=1&sa=X&ftid=0xd71fca13a9fe75b:0x7869d63d01e6dad0"
+                  target="_blank"
+                  class="btn btn-primary custom-button-pedido no-margin-left"
+                  ><span class="white-text">Ir a la web</span></a
+                >
+              </div>
+            </div>
+          </div>
+          
+         
+        </div>
+        <button
+          class="carousel-control-prev d-flex justify-content-center align-items-start"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev"
+        >
+          <span
+            class="carousel-control-prev-icon mt-3"
+            aria-hidden="true"
+          ></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next d-flex justify-content-center align-items-start"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next"
+        >
+          <span
+            class="carousel-control-next-icon mt-3"
+            aria-hidden="true"
+          ></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+    <!-- Bootstrap scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SCRIPTS PROPIOS -->
+    <script src="/js/DOM.js"></script>
+  </body>
+</html>
