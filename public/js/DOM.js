@@ -80,21 +80,3 @@ const shakeAnimationCSS = (event) => {
 
   console.log(iconoBoton.classList);
 };
-window.addEventListener("load", async () => {
-  const images = d.querySelectorAll("img");
-  const imagePromises = Array.from(images).map((img) => {
-    return new Promise((resolve) => {
-      if (img.complete) {
-        resolve();
-      } else {
-        img.addEventListener("load", resolve);
-        img.addEventListener("error", resolve); // En caso de error, también resolvemos la promesa
-      }
-    });
-  });
-
-  await Promise.all(imagePromises);
-
-  const preloader = d.getElementById("preloader");
-  preloader.style.display = "none";
-});

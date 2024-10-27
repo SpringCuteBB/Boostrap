@@ -474,6 +474,12 @@ textarea:focus {
   position: relative;
   bottom: 0;
 }
+.carousel-control-next-icon {
+  background-image: url("/src/SVG/arrow-next.svg") !important;
+}
+.carousel-control-prev-icon {
+  background-image: url("/src/SVG/arrow-back.svg") !important;
+}
 /* BARRA DE NAVEGACION */
 @media (max-width: 991px) {
   .custom-button-pedido {
