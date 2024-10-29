@@ -95,7 +95,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
     //
     const updateIcons = (mode) => {
-      selectorDiv.innerHTML = ""; // Limpiar el contenido anterior
+      selectorDiv.innerHTML = "";
 
       const properties = productData[mode.toLowerCase()];
       for (const key in properties) {
@@ -104,6 +104,7 @@ window.addEventListener("DOMContentLoaded", async () => {
           const imgElement = document.createElement("img");
           imgElement.src = icono;
           imgElement.alt = key;
+          imgElement.id = key;
           imgElement.width = 40;
           imgElement.height = 40;
           imgElement.classList.add("property-icon");
@@ -112,6 +113,36 @@ window.addEventListener("DOMContentLoaded", async () => {
       }
     };
     updateIcons(actualModeEditor);
+    const updateProperty = (mode, prop) => {
+      const columnasOrderDiv = document.querySelector(".columnas-order");
+      columnasOrderDiv.innerHTML = ""; // Limpiar el contenido anterior
+
+      const properties = productData[mode.toLowerCase()];
+      for (const key in properties) {
+        if (properties.hasOwnProperty(key) && key === prop.toLowerCase()) {
+          properties[key].contenido.forEach((property) => {
+            const propertyDiv = document.createElement("div");
+            propertyDiv.classList.add("order-property");
+
+            if (key === "decoracion") {
+              propertyDiv.style.backgroundImage = `url(${property.imagenLayout})`;
+            } else {
+              propertyDiv.style.backgroundColor = property.color;
+            }
+
+            const showPropertyDiv = document.createElement("div");
+            showPropertyDiv.classList.add("show-property");
+            showPropertyDiv.addEventListener("click", () => {
+              console.log(property.nombre);
+            });
+
+            propertyDiv.appendChild(showPropertyDiv);
+            columnasOrderDiv.appendChild(propertyDiv);
+          });
+        }
+      }
+    };
+    updateProperty(actualModeEditor, actualPropertyEditor);
     //
     const cleanButtons = () => {
       let botonsOrderType = Array.from(orderType.childNodes).filter(
@@ -130,6 +161,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         if (actualModeEditor != boton.id) {
           cleanButtons();
           boton.classList.add("actual-boton-type");
+          actualPropertyEditor = "Base";
           actualModeEditor = boton.id;
           if (boton.id === "Tartas") {
             console.log("Tarta");
@@ -137,9 +169,43 @@ window.addEventListener("DOMContentLoaded", async () => {
             console.log("Muffin");
           }
           updateIcons(actualModeEditor);
+          updateProperty(actualModeEditor, actualPropertyEditor);
+          PorpertyButtons();
         }
       });
     });
+    //
+    const clearPropertyButtons = () => {
+      let botonsPropertyType = Array.from(selectorDiv.childNodes).filter(
+        (node) => node.nodeType === Node.ELEMENT_NODE
+      );
+      botonsPropertyType.forEach((boton) => {
+        boton.classList.remove("selected-property");
+      });
+    };
+    //
+    const PorpertyButtons = () => {
+      let botonsPropertyType = Array.from(selectorDiv.childNodes).filter(
+        (node) => node.nodeType === Node.ELEMENT_NODE
+      );
+      botonsPropertyType.forEach((boton, i) => {
+        if (i === 0) {
+          boton.classList.add("selected-property");
+          actualPropertyEditor = boton.id;
+        }
+        boton.addEventListener("click", () => {
+          if (actualPropertyEditor != boton.id) {
+            clearPropertyButtons();
+            actualPropertyEditor = boton.id;
+            boton.classList.add("selected-property");
+          }
+          updateProperty(actualModeEditor, actualPropertyEditor);
+        });
+      });
+    };
+
+    PorpertyButtons();
+
     //
   } catch (error) {
     console.log("Error al cargar el DOM: " + error);

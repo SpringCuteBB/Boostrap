@@ -44,7 +44,7 @@
       "contenido": [
         {
           "nombre": "nata",
-          "color": "#ffffff",
+          "color": "#f5f5f5",
           "imagen": "/src/cakeImages/relleno-1.svg"
         },
         {
@@ -79,7 +79,7 @@
       "contenido": [
         {
           "nombre": "nata",
-          "color": "#ffffff",
+          "color": "#f5f5f5",
           "imagen": "/src/cakeImages/bordes-1.svg"
         },
         {
@@ -121,7 +121,7 @@
       "contenido": [
         {
           "nombre": "nata",
-          "color": "#ffffff",
+          "color": "#f5f5f5",
           "imagen": "/src/muffinImages/relleno-1.svg"
         },
         {
