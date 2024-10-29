@@ -31,6 +31,10 @@ routes.orders = "/orders";
 
 const anioActual = new Date().getFullYear();
 
+//JSON
+app.get("/api/data", (req, res) => {
+  res.sendFile(path.join(__dirname, "products.json")); 
+});
 // RUTAS
 app.get(routes.home, (req, res) => {
   res.render("index", { anioActual: anioActual });

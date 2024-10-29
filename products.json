@@ -1,0 +1,156 @@
+{
+  "tartas": {
+    "base": {
+      "contenido": [
+        {
+          "nombre": "claro",
+          "color": "#ffdc8d",
+          "imagen": "/src/cakeImages/base-1.svg"
+        },
+        {
+          "nombre": "marron",
+          "color": "#c08659",
+          "imagen": "/src/cakeImages/base-2.svg"
+        },
+        {
+          "nombre": "oscuro",
+          "color": "#664f3f",
+          "imagen": "/src/cakeImages/base-3.svg"
+        }
+      ],
+      "icono": "/src/SVG/base-icon.svg"
+    },
+    "encima": {
+      "contenido": [
+        {
+          "nombre": "chocolate blanco",
+          "color": "#f4d0ae",
+          "imagen": "/src/cakeImages/encima-2.svg"
+        },
+        {
+          "nombre": "chocolate marron",
+          "color": "#894b20",
+          "imagen": "/src/cakeImages/encima-1.svg"
+        },
+        {
+          "nombre": "chocolate negro",
+          "color": "#3a281a",
+          "imagen": "/src/cakeImages/encima-3.svg"
+        }
+      ],
+      "icono": "/src/SVG/encima-icon.svg"
+    },
+    "relleno": {
+      "contenido": [
+        {
+          "nombre": "nata",
+          "color": "#ffffff",
+          "imagen": "/src/cakeImages/relleno-1.svg"
+        },
+        {
+          "nombre": "fresa",
+          "color": "#ee4990",
+          "imagen": "/src/cakeImages/relleno-2.svg"
+        },
+        {
+          "nombre": "chocolate",
+          "color": "#3a281a",
+          "imagen": "/src/cakeImages/relleno-3.svg"
+        }
+      ],
+      "icono": "/src/SVG/relleno-icon.svg"
+    },
+    "decoracion": {
+      "contenido": [
+        {
+          "nombre": "Birutas",
+          "imagenLayout": "/src/SVG/LayOutDecoration-1.svg",
+          "imagen": "/src/cakeImages/decoracion-1.svg"
+        },
+        {
+          "nombre": "Bolas de chocolate",
+          "imagenLayout": "/src/SVG/LayOutDecoration-2.svg",
+          "imagen": "/src/cakeImages/decoracion-2.svg"
+        }
+      ],
+      "icono": "/src/SVG/decoracion-icon.svg"
+    },
+    "bordeado": {
+      "contenido": [
+        {
+          "nombre": "nata",
+          "color": "#ffffff",
+          "imagen": "/src/cakeImages/bordes-1.svg"
+        },
+        {
+          "nombre": "fresa",
+          "color": "#ee4990",
+          "imagen": "/src/cakeImages/bordes-2.svg"
+        },
+        {
+          "nombre": "chocolate",
+          "color": "#3a281a",
+          "imagen": "/src/cakeImages/bordes-3.svg"
+        }
+      ],
+      "icono": "/src/SVG/bordes-icon.svg"
+    }
+  },
+  "muffins": {
+    "base": {
+      "contenido": [
+        {
+          "nombre": "claro",
+          "color": "#ffdc8d",
+          "imagen": "/src/muffinImages/base-1.svg"
+        },
+        {
+          "nombre": "marron",
+          "color": "#c08659",
+          "imagen": "/src/muffinImages/base-2.svg"
+        },
+        {
+          "nombre": "oscuro",
+          "color": "#664f3f",
+          "imagen": "/src/muffinImages/base-3.svg"
+        }
+      ],
+      "icono": "/src/SVG/muffinbase-icon.svg"
+    },
+    "relleno": {
+      "contenido": [
+        {
+          "nombre": "nata",
+          "color": "#ffffff",
+          "imagen": "/src/muffinImages/relleno-1.svg"
+        },
+        {
+          "nombre": "fresa",
+          "color": "#ee4990",
+          "imagen": "/src/muffinImages/relleno-2.svg"
+        },
+        {
+          "nombre": "chocolate",
+          "color": "#3a281a",
+          "imagen": "/src/muffinImages/relleno-3.svg"
+        }
+      ],
+      "icono": "/src/SVG/muffinrelleno-icon.svg"
+    },
+    "decoracion": {
+      "contenido": [
+        {
+          "nombre": "Birutas",
+          "imagenLayout": "/src/SVG/LayOutDecoration-1.svg",
+          "imagen": "/src/muffinImages/decoracion-1.svg"
+        },
+        {
+          "nombre": "Bolas de chocolate",
+          "imagenLayout": "/src/SVG/LayOutDecoration-2.svg",
+          "imagen": "/src/muffinImages/decoracion-1.svg"
+        }
+      ],
+      "icono": "/src/SVG/muffindecoracion-icon.svg"
+    }
+  }
+}

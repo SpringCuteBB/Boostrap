@@ -2,13 +2,24 @@
   --chocolate: #281d10;
   --darkerchocolate: #1e140c;
   --sweet: #d1f3f2;
-  --darkersweet: #b7e4e2;
+  --darkersweet: #719e9c;
   --pink: #eb90c2;
   --darkerpink: #d97ab0;
   --main: #ef4a7c;
   --darkermain: #e33e6f;
   --white: #fff;
   --darkerwhite: #f2f2f2;
+}
+.property-icon {
+  margin-right: 20px;
+  padding: 3px;
+}
+.property-icon:hover {
+  cursor: pointer;
+}
+.selected-property {
+  border: solid 2px var(--chocolate);
+  border-radius: 1.5em;
 }
 @font-face {
   font-family: "Bulleto";
@@ -378,7 +389,7 @@ input {
   border: none !important;
   border-bottom: 2px solid var(--chocolate) !important;
   border-radius: 0px !important;
-  font-family: "sans-serif";
+  font-family: "DM Sans", sans-serif;
 }
 input::placeholder {
   color: #d6d6d6 !important;
@@ -389,7 +400,7 @@ input:focus {
   box-shadow: none !important;
 }
 .serius-text {
-  font-family: "sans-serif";
+  font-family: "DM Sans", sans-serif;
 }
 label {
   font-family: "Ambery Garden";
@@ -434,7 +445,7 @@ label {
 textarea {
   border: 2px solid var(--chocolate) !important;
   border-radius: 0px !important;
-  font-family: "sans-serif";
+  font-family: "DM Sans", sans-serif;
 }
 textarea::placeholder {
   color: #d6d6d6 !important;
@@ -446,7 +457,7 @@ textarea:focus {
 }
 .error {
   color: red;
-  font-family: "sans-serif";
+  font-family: "DM Sans", sans-serif;
   font-size: 90%;
 }
 .custom-carousel-indicators {
@@ -481,7 +492,7 @@ textarea:focus {
   background-image: url("/src/SVG/arrow-back.svg") !important;
 }
 .card-text {
-  font-family: "sans-serif" !important;
+  font-family: "DM Sans", sans-serif !important;
 }
 .order-gestor {
   padding-top: 100px;
@@ -508,17 +519,36 @@ textarea:focus {
   width: 30px;
   height: 30px;
   margin: 5px;
+  background-image: url("/src/SVG/info-icon.svg");
+  background-size: 70% 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.show-property:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
 }
 .orders-cesta {
+  display: none;
+  animation: fadeIn 0.5s;
   height: 300px;
   width: 300px;
   z-index: 10;
-  position: absolute;
+  position: absolute !important;
   margin-top: 80px;
+  left: -300px;
   background-color: white;
   padding: 10px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.123);
   border-radius: 0.5em;
+}
+.disabled {
+  pointer-events: none !important;
+  opacity: 0.5 !important;
+  background-color: var(--darkersweet) !important;
+}
+#iconoTienda:hover {
+  cursor: pointer;
 }
 .cesta-contenedor {
   padding-top: 10px;
@@ -552,6 +582,24 @@ textarea:focus {
   display: grid;
   justify-content: end;
   align-items: end;
+}
+.titulo-elemento,
+.precio-total {
+  font-family: "DM Sans", sans-serif;
+}
+.boton-order-type {
+  border: none !important;
+  background-color: var(--chocolate);
+  border-radius: 0.5em;
+  padding: 5px 20px;
+  color: var(--white);
+  font-family: "Bulleto";
+}
+.actual-boton-type {
+  border: solid 3px var(--chocolate) !important;
+  background-color: transparent !important;
+  color: var(--chocolate) !important;
+  font-family: "Bulleto";
 }
 @media (max-width: 1500px) {
   .columnas-order {

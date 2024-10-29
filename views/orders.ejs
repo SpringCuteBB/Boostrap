@@ -11,8 +11,14 @@
     />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="shortcut icon" href="/src/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
+  <body style="overflow-x: auto">
     <!-- BARRA DE NAVEGACION -->
     <nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
       <div class="container-fluid">
@@ -104,44 +110,80 @@
     </nav>
     <section class="orders-section vh-100" style="overflow-x: hidden">
       <div class="row" style="height: 100% !important">
-        <div class="col-lg-8" style="background-color: rebeccapurple"></div>
+        <div
+          class="col-lg-8 d-flex justify-content-center align-items-center"
+          style="background-color: rebeccapurple"
+        >
+          <div class="displayer-pedido">
+            <div style="position: relative; width: 500px; height: 500px">
+              <!-- <img
+                src="/src/cakeImages/base-1.svg"
+                width="500"
+                height="500"
+                alt=""
+                style="position: absolute; z-index: 1; top: 0; left: 0"
+              />
+              <img
+                src="/src/cakeImages/encima-1.svg"
+                width="500"
+                height="500"
+                alt=""
+                style="position: absolute; z-index: 2; top: 0; left: 0"
+              /> -->
+            </div>
+          </div>
+        </div>
         <div class="col-lg-4 order-gestor">
           <div class="row">
             <h1 class="col-lg-6">Haz tu pedido</h1>
             <div class="col-lg-6 d-flex justify-content-end pe-5">
-              <img src="" alt="" width="70" height="70" />
-              <div class="orders-cesta">
-                <div class="cesta-contenedor" style="background-color: red">
-                  <div
-                    class="cesta-elemento"
-                    style="background-color: yellow; height: 70px"
-                  >
-                    <div class="cesta-elemento-div1">
-                      <p>Tarta 1</p>
-                    </div>
-                    <div class="cesta-elemento-div2">
-                      <a href="">Editar</a>
-                      <a href="">Eliminar</a>
+              <img
+                id="iconoTienda"
+                src="/src/svg/tienda-icon.svg"
+                alt=""
+                width="50"
+                height="50"
+              />
+              <div style="position: relative">
+                <div class="orders-cesta" id="displayTiendaProductos">
+                  <div class="cesta-contenedor" style="background-color: red">
+                    <div
+                      class="cesta-elemento"
+                      style="background-color: yellow; height: 70px"
+                    >
+                      <div class="cesta-elemento-div1">
+                        <p class="titulo-elemento">Tarta 1</p>
+                      </div>
+                      <div class="cesta-elemento-div2">
+                        <a href=""></a>
+                        <a href="">Eliminar</a>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="comprar-boton" style="height: 20%">
-                  <div class="comprar-boton-1">
-                    <p>Total: $100</p>
-                  </div>
-                  <div class="comprar-boton-2">
-                    <button class="mt-3">Comprar</button>
+                  <div class="comprar-boton" style="height: 20%">
+                    <div class="comprar-boton-1">
+                      <p class="precio-total">Total: $100</p>
+                    </div>
+                    <div class="comprar-boton-2">
+                      <button
+                        class="mt-3 btn btn-primary boton-order custom-button-pedido no-margin-left"
+                      >
+                        Comprar
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="mt-5 order-type">
-            <button class="boton-order-type">Tarta</button>
-            <button class="boton-order-type">Muffin</button>
+          <div class="mt-5 order-type" id="orderType">
+            <button class="boton-order-type actual-boton-type" id="Tartas">
+              Tarta
+            </button>
+            <button class="boton-order-type" id="Muffins">Muffin</button>
           </div>
           <div class="mt-3 order-properties-selector">
-            <img src="" alt="" width="30" height="30" />
+            <!-- <img src="" alt="" width="30" height="30" /> -->
           </div>
           <div class="mt-3 order-properties-container">
             <div class="columnas-order">
@@ -154,7 +196,12 @@
             </div>
           </div>
           <div class="mt-5 d-flex justify-content-center">
-            <button class="boton-order">Agregar</button>
+            <button
+              class="mb-5 btn btn-primary boton-order custom-button-pedido no-margin-left disabled"
+              disabled
+            >
+              <span class="white-text">+ Agregar</span>
+            </button>
           </div>
         </div>
       </div>
