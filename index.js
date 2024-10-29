@@ -27,6 +27,7 @@ routes.contact = "/contact";
 routes.contacted = "/contacted";
 routes.physicalStores = "/physical-stores";
 routes.onlineStores = "/online-stores";
+routes.orders = "/orders";
 
 const anioActual = new Date().getFullYear();
 
@@ -49,6 +50,9 @@ app.get(routes.physicalStores, (req, res) => {
 });
 app.get(routes.onlineStores, (req, res) => {
   res.render("onlineStores", { anioActual: anioActual });
+});
+app.get(routes.orders, (req, res) => {
+  res.render("orders", { anioActual: anioActual });
 });
 // API para enviar el formulario de contacto
 app.post("/Form", async (req, res) => {
