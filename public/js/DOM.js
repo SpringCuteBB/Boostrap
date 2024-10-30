@@ -5,18 +5,19 @@ let togglerButton,
   iconoTienda,
   displayTiendaProductos,
   orderType,
-  selectorDiv;
-let actualModeEditor = "Tartas";
-let actualPropertyEditor = "Base";
+  selectorDiv,
+  columnasOrder;
+let actualModeEditor = "tartas";
+let actualPropertyEditor = "base";
 
 let pedido = {
   Type: actualModeEditor,
   Prop: {
-    base: null,
-    relleno: null,
+    base: "claro", //Por defecto
+    relleno: "nata", //Por defecto
     bordes: null,
     decoracion: null,
-    encima: null,
+    encima: actualModeEditor === "tartas" ? "chocolate blanco" : null,
   },
 };
 
@@ -29,7 +30,8 @@ const DOM = () => {
       iconoTienda = d.getElementById("iconoTienda");
       displayTiendaProductos = d.getElementById("displayTiendaProductos");
       orderType = d.getElementById("orderType");
-      selectorDiv = document.querySelector(".order-properties-selector");
+      selectorDiv = d.querySelector(".order-properties-selector");
+      columnasOrder = d.getElementById("columnasOrder");
       resolve();
     } catch (error) {
       reject(error);
@@ -82,7 +84,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     } else {
       console.log("customButtonPedido no existe.");
     }
-    //
+    // Tienda
     iconoTienda.addEventListener("click", () => {
       if (
         displayTiendaProductos.style.display === "none" ||
@@ -93,7 +95,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         displayTiendaProductos.style.display = "none";
       }
     });
-    //
+    // Actualiza los iconos
     const updateIcons = (mode) => {
       selectorDiv.innerHTML = "";
 
@@ -113,9 +115,76 @@ window.addEventListener("DOMContentLoaded", async () => {
       }
     };
     updateIcons(actualModeEditor);
+    //
+    const cleanTypeButtons = () => {
+      let botonsColumnasOrder = Array.from(columnasOrder.childNodes).filter(
+        (node) => node.nodeType === Node.ELEMENT_NODE
+      );
+      botonsColumnasOrder.forEach((boton) => {
+        boton.classList.remove("selected-product");
+      });
+    };
+    //
+    const selectedProperty = (property) => {
+      let botonsColumnasOrder = Array.from(columnasOrder.childNodes).filter(
+        (node) => node.nodeType === Node.ELEMENT_NODE
+      );
+      botonsColumnasOrder.forEach((boton) => {
+        console.log(pedido.Prop[property], boton.id);
+        if (pedido.Prop[property] == boton.id) {
+          cleanTypeButtons();
+          boton.classList.add("selected-product");
+        }
+      });
+    };
+    //
+    const imageSelectedProperty = () => {
+      const divs = document.querySelectorAll(".contenedor-pedido-imagenes img");
+      //
+      const limpiar = () => {
+        divs.forEach((imagen) => {
+          imagen.src = "";
+        });
+      };
+      limpiar();
+      //
+      divs.forEach((imagen) => {
+        let partes = imagen.id.split(" ");
+        let prop = partes[0];
+        let tipo = partes[1];
+        let actualPropiedad = pedido.Prop[prop];
+        let arrayPropiedad =
+          productData[tipo.toLowerCase()][prop.toLowerCase()].contenido;
+        arrayPropiedad.forEach((propiedad) => {
+          console.log(actualModeEditor);
+          if (
+            propiedad.nombre === actualPropiedad &&
+            tipo == actualModeEditor.toLowerCase()
+          ) {
+            imagen.src = propiedad.imagen;
+          }
+        });
+      });
+    };
+    imageSelectedProperty();
+    // Botones de las propiedades
+    const orderTypeButtons = () => {
+      let botonsColumnasOrder = Array.from(columnasOrder.childNodes).filter(
+        (node) => node.nodeType === Node.ELEMENT_NODE
+      );
+      botonsColumnasOrder.forEach((boton) => {
+        boton.addEventListener("click", () => {
+          pedido.Prop[actualPropertyEditor.toLowerCase()] = boton.id;
+          cleanTypeButtons();
+          boton.classList.add("selected-product");
+          imageSelectedProperty();
+        });
+      });
+    };
+    // Actualiza las propiedades
     const updateProperty = (mode, prop) => {
       const columnasOrderDiv = document.querySelector(".columnas-order");
-      columnasOrderDiv.innerHTML = ""; // Limpiar el contenido anterior
+      columnasOrderDiv.innerHTML = "";
 
       const properties = productData[mode.toLowerCase()];
       for (const key in properties) {
@@ -129,11 +198,20 @@ window.addEventListener("DOMContentLoaded", async () => {
             } else {
               propertyDiv.style.backgroundColor = property.color;
             }
-
+            propertyDiv.id = property.nombre;
             const showPropertyDiv = document.createElement("div");
             showPropertyDiv.classList.add("show-property");
             showPropertyDiv.addEventListener("click", () => {
-              console.log(property.nombre);
+              //Click
+              document.getElementById("propertyModalLabel").innerText =
+                "SABOR: ";
+              document.getElementById("propertyModalContent").innerText =
+                property.nombre;
+
+              const propertyModal = new bootstrap.Modal(
+                document.getElementById("propertyModal")
+              );
+              propertyModal.show();
             });
 
             propertyDiv.appendChild(showPropertyDiv);
@@ -141,6 +219,9 @@ window.addEventListener("DOMContentLoaded", async () => {
           });
         }
       }
+      console.log("Hola");
+      selectedProperty(actualPropertyEditor.toLowerCase());
+      orderTypeButtons();
     };
     updateProperty(actualModeEditor, actualPropertyEditor);
     //
@@ -157,6 +238,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       (node) => node.nodeType === Node.ELEMENT_NODE
     );
     botonsOrderType.forEach((boton) => {
+      //Cambia tipo
       boton.addEventListener("click", () => {
         if (actualModeEditor != boton.id) {
           cleanButtons();
@@ -171,7 +253,19 @@ window.addEventListener("DOMContentLoaded", async () => {
           updateIcons(actualModeEditor);
           updateProperty(actualModeEditor, actualPropertyEditor);
           PorpertyButtons();
+          pedido = {
+            Type: actualModeEditor,
+            Prop: {
+              base: "claro",
+              relleno: "nata",
+              bordes: null,
+              decoracion: null,
+              encima: actualModeEditor === "Tartas" ? "chocolate blanco" : null,
+            },
+          };
+          selectedProperty(actualPropertyEditor);
         }
+        imageSelectedProperty();
       });
     });
     //
@@ -185,6 +279,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     };
     //
     const PorpertyButtons = () => {
+      //Cambia propiedad
       let botonsPropertyType = Array.from(selectorDiv.childNodes).filter(
         (node) => node.nodeType === Node.ELEMENT_NODE
       );
@@ -205,7 +300,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     };
 
     PorpertyButtons();
-
     //
   } catch (error) {
     console.log("Error al cargar el DOM: " + error);

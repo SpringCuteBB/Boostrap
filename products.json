@@ -75,7 +75,7 @@
       ],
       "icono": "/src/SVG/decoracion-icon.svg"
     },
-    "bordeado": {
+    "bordes": {
       "contenido": [
         {
           "nombre": "nata",
@@ -147,7 +147,7 @@
         {
           "nombre": "Bolas de chocolate",
           "imagenLayout": "/src/SVG/LayOutDecoration-2.svg",
-          "imagen": "/src/muffinImages/decoracion-1.svg"
+          "imagen": "/src/muffinImages/decoracion-2.svg"
         }
       ],
       "icono": "/src/SVG/muffindecoracion-icon.svg"

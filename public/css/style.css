@@ -7,12 +7,14 @@
   --darkerpink: #d97ab0;
   --main: #ef4a7c;
   --darkermain: #e33e6f;
+  --superdarkermain: #b4204a;
   --white: #fff;
   --darkerwhite: #f2f2f2;
 }
 .property-icon {
   margin-right: 20px;
   padding: 3px;
+  border: solid 2px transparent;
 }
 .property-icon:hover {
   cursor: pointer;
@@ -20,6 +22,15 @@
 .selected-property {
   border: solid 2px var(--chocolate);
   border-radius: 1.5em;
+}
+.selected-product {
+  border: solid 2px var(--superdarkermain);
+}
+.order-property:hover {
+  cursor: pointer;
+}
+img[src=""] {
+  display: none;
 }
 @font-face {
   font-family: "Bulleto";
