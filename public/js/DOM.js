@@ -165,6 +165,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             const nuevaImagen = new Image();
             nuevaImagen.src = propiedad.imagen;
             nuevaImagen.onload = () => {
+              // Solo cambiar la imagen cuando la nueva imagen se haya cargado completamente
               imagen.src = nuevaImagen.src;
             };
           }
