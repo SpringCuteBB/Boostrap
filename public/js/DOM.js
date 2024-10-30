@@ -140,14 +140,14 @@ window.addEventListener("DOMContentLoaded", async () => {
     //
     const imageSelectedProperty = () => {
       const divs = document.querySelectorAll(".contenedor-pedido-imagenes img");
-      //
+
       const limpiar = () => {
         divs.forEach((imagen) => {
           imagen.src = "";
         });
       };
       limpiar();
-      //
+
       divs.forEach((imagen) => {
         let partes = imagen.id.split(" ");
         let prop = partes[0];
@@ -155,17 +155,23 @@ window.addEventListener("DOMContentLoaded", async () => {
         let actualPropiedad = pedido.Prop[prop];
         let arrayPropiedad =
           productData[tipo.toLowerCase()][prop.toLowerCase()].contenido;
+
         arrayPropiedad.forEach((propiedad) => {
           console.log(actualModeEditor);
           if (
             propiedad.nombre === actualPropiedad &&
             tipo == actualModeEditor.toLowerCase()
           ) {
-            imagen.src = propiedad.imagen;
+            const nuevaImagen = new Image();
+            nuevaImagen.src = propiedad.imagen;
+            nuevaImagen.onload = () => {
+              imagen.src = nuevaImagen.src;
+            };
           }
         });
       });
     };
+
     imageSelectedProperty();
     // Botones de las propiedades
     const orderTypeButtons = () => {
