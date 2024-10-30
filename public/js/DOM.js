@@ -143,6 +143,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
       const limpiar = () => {
         divs.forEach((imagen) => {
+          imagen.style.visibility = "hidden"; // Ocultar la imagen mientras se limpia
           imagen.src = "";
         });
       };
@@ -167,6 +168,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             nuevaImagen.onload = () => {
               // Solo cambiar la imagen cuando la nueva imagen se haya cargado completamente
               imagen.src = nuevaImagen.src;
+              imagen.style.visibility = "visible"; // Mostrar la imagen después de cargar
             };
           }
         });
