@@ -6,10 +6,12 @@ let togglerButton,
   displayTiendaProductos,
   orderType,
   selectorDiv,
-  columnasOrder;
+  columnasOrder,
+  botonAgregar,
+  buyButton;
 let actualModeEditor = "tartas";
 let actualPropertyEditor = "base";
-
+let precio = 0;
 let pedido = {
   Type: actualModeEditor,
   Prop: {
@@ -20,6 +22,7 @@ let pedido = {
     encima: actualModeEditor === "tartas" ? "chocolate blanco" : null,
   },
 };
+let pedidos = [];
 
 const DOM = () => {
   return new Promise((resolve, reject) => {
@@ -32,6 +35,8 @@ const DOM = () => {
       orderType = d.getElementById("orderType");
       selectorDiv = d.querySelector(".order-properties-selector");
       columnasOrder = d.getElementById("columnasOrder");
+      botonAgregar = d.getElementById("botonAgregar");
+      buyButton = d.getElementById("buyButton");
       resolve();
     } catch (error) {
       reject(error);
@@ -166,9 +171,8 @@ window.addEventListener("DOMContentLoaded", async () => {
             const nuevaImagen = new Image();
             nuevaImagen.src = propiedad.imagen;
             nuevaImagen.onload = () => {
-              // Solo cambiar la imagen cuando la nueva imagen se haya cargado completamente
               imagen.src = nuevaImagen.src;
-              imagen.style.visibility = "visible"; // Mostrar la imagen después de cargar
+              imagen.style.visibility = "visible";
             };
           }
         });
@@ -254,11 +258,6 @@ window.addEventListener("DOMContentLoaded", async () => {
           boton.classList.add("actual-boton-type");
           actualPropertyEditor = "Base";
           actualModeEditor = boton.id;
-          if (boton.id === "Tartas") {
-            console.log("Tarta");
-          } else if (boton.id === "Muffins") {
-            console.log("Muffin");
-          }
           updateIcons(actualModeEditor);
           updateProperty(actualModeEditor, actualPropertyEditor);
           PorpertyButtons();
@@ -269,7 +268,7 @@ window.addEventListener("DOMContentLoaded", async () => {
               relleno: "nata",
               bordes: null,
               decoracion: null,
-              encima: actualModeEditor === "Tartas" ? "chocolate blanco" : null,
+              encima: actualModeEditor === "tartas" ? "chocolate blanco" : null,
             },
           };
           selectedProperty(actualPropertyEditor);
@@ -310,6 +309,138 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     PorpertyButtons();
     //
+    const botonAgregar = document.getElementById("botonAgregar");
+    const cestaContenedor = document.querySelector(".cesta-contenedor");
+    const precioTotal = document.getElementById("precio");
+    //
+    const actualizarPedidosDOM = () => {
+      cestaContenedor.innerHTML = "";
+
+      let contadorTartas = 0;
+      let contadorMuffins = 0;
+
+      pedidos.forEach((pedido, index) => {
+        const pedidoElemento = document.createElement("div");
+        pedidoElemento.classList.add("cesta-elemento");
+
+        const div1 = document.createElement("div");
+        div1.classList.add("cesta-elemento-div1");
+
+        const p = document.createElement("p");
+        p.classList.add("titulo-elemento");
+
+        const span = document.createElement("span");
+        span.classList.add("white-text");
+
+        if (pedido.pedido.Type === "tartas") {
+          contadorTartas++;
+          span.textContent = `Tarta ${contadorTartas}`;
+        } else if (pedido.pedido.Type === "muffins") {
+          contadorMuffins++;
+          span.textContent = `Muffin ${contadorMuffins}`;
+        }
+
+        p.appendChild(span);
+        div1.appendChild(p);
+
+        const div2 = document.createElement("div");
+        div2.classList.add("cesta-elemento-div2");
+
+        const eliminarLink = document.createElement("a");
+        eliminarLink.href = "/orders";
+        eliminarLink.textContent = "Eliminar";
+        eliminarLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          eliminarPedido(index);
+        });
+
+        div2.appendChild(eliminarLink);
+
+        pedidoElemento.appendChild(div1);
+        pedidoElemento.appendChild(div2);
+
+        cestaContenedor.appendChild(pedidoElemento);
+      });
+
+      const totalPrecio = pedidos.reduce(
+        (total, pedido) => total + pedido.precio,
+        0
+      );
+      precioTotal.textContent = totalPrecio;
+    };
+    //
+    const eliminarPedido = (index) => {
+      pedidos.splice(index, 1);
+      actualizarPedidosDOM();
+      if (cestaContenedor.children.length <= 0) {
+        buyButton.disabled = true;
+        buyButton.classList.add("disabled");
+      }
+    };
+    //
+    botonAgregar.addEventListener("click", () => {
+      precio = 0;
+      const pedidoActual = JSON.parse(JSON.stringify(pedido));
+
+      for (let key in pedidoActual.Prop) {
+        if (pedidoActual.Prop[key] !== null) {
+          precio += productData[actualModeEditor.toLowerCase()][key].precio;
+        }
+      }
+
+      const pedidoConPrecio = {
+        pedido: pedidoActual,
+        precio: precio,
+      };
+
+      pedidos.push(pedidoConPrecio);
+      console.log(pedidos);
+
+      actualizarPedidosDOM();
+      if (cestaContenedor.children.length > 0) {
+        buyButton.disabled = false;
+        buyButton.classList.remove("disabled");
+      }
+    });
+
+    actualizarPedidosDOM();
+    //
+    var stripeHandler = StripeCheckout.configure({
+      key: publicStripeKey,
+      locate: "auto",
+      token: function (token) {
+        fetch("/purchase", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            id: token.id,
+            contenido: pedidos,
+          }),
+        }).then((data) => {
+          alert("Pago exitoso");
+          pedidos = [];
+          actualizarPedidosDOM();
+          buyButton.disabled = true;
+          buyButton.classList.add("disabled");
+        });
+      },
+    });
+    buyButton.addEventListener("click", async () => {
+      const precioTotal = parseFloat(
+        document.getElementById("precio").textContent
+      );
+
+      try {
+        stripeHandler.open({
+          amount: precioTotal * 100,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    });
   } catch (error) {
     console.log("Error al cargar el DOM: " + error);
   }

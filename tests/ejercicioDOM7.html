@@ -1,0 +1,36 @@
+<!-- ISMAEL VALENZUELA MAÑAS 20/10/2024
+
+ENUNCIADO: En un botón, en el cual no se puede emplear la propiedad id para tenerlo localizado, detectar y mostrar por consola lo siguiente:
+que el usuario ha entrado en el botón con el ratón,
+que el usuario se ha desplazado por él, y
+y que el usuario ha dejado de estar sobre el botón. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button>hola soy un boton.</button>
+    <script>
+      const d = document;
+      const Nodes = Array.from(d.body.childNodes).filter(
+        (node) => node.nodeType === Node.ELEMENT_NODE
+      );
+      boton = Nodes[0];
+      d.addEventListener("DOMContentLoaded", function () {
+        boton.addEventListener("mouseenter", function () {
+          console.log("Acaba de entrar el mouse en el boton.");
+        });
+        boton.addEventListener("mouseleave", function () {
+          console.log("Acaba de salir el mouse del boton.");
+        });
+        boton.addEventListener("mousemove", function () {
+          console.log("Acaba de hacer moverse en el boton.");
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!-- ISMAEL VALENZUELA MAÑAS 30/10/2024
+ENUNCIADO: Crear una página html que contenga 10 párrafos generados de forma dinámica y definir su propiedad id para el primero de ellos. Cambiar el tamaño de fuente por '70px' para todos los párrafos pares de la página (puedes ayudarte, si quieres, con un botón), y cambia el color a rojo para los que son primos (aquí también puedes emplear otro botón). -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .red-text {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="changeFontSize">Cambiar tamaño de fuente</button>
+    <button id="changeColor">Cambiar color de primos</button>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const d = document;
+        const b = d.body;
+
+        for (let i = 1; i <= 10; i++) {
+          const p = d.createElement("p");
+          p.id = `parrafo${i}`;
+          p.appendChild(d.createTextNode(`Párrafo ${i}`));
+          b.appendChild(p);
+        }
+
+        // PARES
+        d.getElementById("changeFontSize").addEventListener("click", () => {
+          const paragraphs = d.getElementsByTagName("p");
+          for (let i = 0; i < paragraphs.length; i++) {
+            if ((i + 1) % 2 === 0) {
+              paragraphs[i].style.fontSize = "70px";
+            }
+          }
+        });
+
+        // PRIMOS
+        d.getElementById("changeColor").addEventListener("click", () => {
+          const paragraphs = d.getElementsByTagName("p");
+          for (let i = 0; i < paragraphs.length; i++) {
+            if (esPrimo(i + 1)) {
+              paragraphs[i].classList.add("red-text");
+            }
+          }
+        });
+
+        function esPrimo(numero) {
+          if (numero <= 1) return false;
+          if (numero <= 3) return true;
+          if (numero % 2 === 0 || numero % 3 === 0) return false;
+          for (let i = 5; i * i <= numero; i += 6) {
+            if (numero % i === 0 || numero % (i + 2) === 0) return false;
+          }
+          return true;
+        }
+      });
+    </script>
+  </body>
+</html>

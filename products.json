@@ -18,7 +18,8 @@
           "imagen": "/src/cakeImages/base-3.svg"
         }
       ],
-      "icono": "/src/SVG/base-icon.svg"
+      "icono": "/src/SVG/base-icon.svg",
+      "precio": 4
     },
     "encima": {
       "contenido": [
@@ -38,7 +39,8 @@
           "imagen": "/src/cakeImages/encima-3.svg"
         }
       ],
-      "icono": "/src/SVG/encima-icon.svg"
+      "icono": "/src/SVG/encima-icon.svg",
+      "precio": 4
     },
     "relleno": {
       "contenido": [
@@ -58,7 +60,8 @@
           "imagen": "/src/cakeImages/relleno-3.svg"
         }
       ],
-      "icono": "/src/SVG/relleno-icon.svg"
+      "icono": "/src/SVG/relleno-icon.svg",
+      "precio": 4
     },
     "decoracion": {
       "contenido": [
@@ -73,7 +76,8 @@
           "imagen": "/src/cakeImages/decoracion-2.svg"
         }
       ],
-      "icono": "/src/SVG/decoracion-icon.svg"
+      "icono": "/src/SVG/decoracion-icon.svg",
+      "precio": 4
     },
     "bordes": {
       "contenido": [
@@ -93,7 +97,8 @@
           "imagen": "/src/cakeImages/bordes-3.svg"
         }
       ],
-      "icono": "/src/SVG/bordes-icon.svg"
+      "icono": "/src/SVG/bordes-icon.svg",
+      "precio": 4
     }
   },
   "muffins": {
@@ -115,7 +120,8 @@
           "imagen": "/src/muffinImages/base-3.svg"
         }
       ],
-      "icono": "/src/SVG/muffinbase-icon.svg"
+      "icono": "/src/SVG/muffinbase-icon.svg",
+      "precio": 4
     },
     "relleno": {
       "contenido": [
@@ -135,7 +141,8 @@
           "imagen": "/src/muffinImages/relleno-3.svg"
         }
       ],
-      "icono": "/src/SVG/muffinrelleno-icon.svg"
+      "icono": "/src/SVG/muffinrelleno-icon.svg",
+      "precio": 4
     },
     "decoracion": {
       "contenido": [
@@ -150,7 +157,8 @@
           "imagen": "/src/muffinImages/decoracion-2.svg"
         }
       ],
-      "icono": "/src/SVG/muffindecoracion-icon.svg"
+      "icono": "/src/SVG/muffindecoracion-icon.svg",
+      "precio": 4
     }
   }
 }

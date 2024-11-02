@@ -13,7 +13,6 @@
     <link rel="shortcut icon" href="/src/favicon.ico" type="image/x-icon" />
   </head>
   <body>
-
     <!-- BARRA DE NAVEGACION -->
     <nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
       <div class="container-fluid">
@@ -90,6 +89,7 @@
           <button
             class="btn btn-primary custom-button-pedido px-4 ms-auto"
             id="custom-button-pedido"
+            onclick="window.location.href='/orders'"
           >
             <img
               src="/src/SVG/pedido-icon.svg"
@@ -173,6 +173,7 @@
             width="300"
             class="btn btn-primary custom-button-pedido px-4 not-margin"
             id="custom-button-pedido"
+            onclick="window.location.href='/orders'"
           >
             Realiza tu pedido ya
           </button>
@@ -205,7 +206,7 @@
                 <a href="<%= route('contact') %>" class="">Contáctanos</a>
               </li>
               <li>
-                <a href="#!" class="">Haz tu pedido</a>
+                <a href="<%= route('orders')%>" class="">Haz tu pedido</a>
               </li>
             </ul>
           </div>

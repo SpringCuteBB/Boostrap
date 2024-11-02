@@ -90,6 +90,7 @@
           <button
             class="btn btn-primary custom-button-pedido px-4 ms-auto"
             id="custom-button-pedido"
+            onclick="window.location.href='/orders'"
           >
             <img
               src="/src/SVG/pedido-icon.svg"
@@ -171,7 +172,7 @@
                 <a href="<%= route('contact') %>" class="">Contáctanos</a>
               </li>
               <li>
-                <a href="#!" class="">Haz tu pedido</a>
+                <a href="<%= route('orders')%>" class="">Haz tu pedido</a>
               </li>
             </ul>
           </div>

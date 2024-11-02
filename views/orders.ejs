@@ -17,6 +17,9 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
       rel="stylesheet"
     />
+    <script>
+      var publicStripeKey = "<%=publicStripeKey%>";
+    </script>
   </head>
   <body style="overflow-x: auto">
     <!-- BARRA DE NAVEGACION -->
@@ -95,6 +98,7 @@
           <button
             class="btn btn-primary custom-button-pedido px-4 ms-auto"
             id="custom-button-pedido"
+            onclick="window.location.href='/orders'"
           >
             <img
               src="/src/SVG/pedido-icon.svg"
@@ -111,9 +115,10 @@
     <section class="orders-section vh-100" style="overflow-x: hidden">
       <div class="row" style="height: 100% !important">
         <div
-          class="col-lg-8 d-flex justify-content-center align-items-center"
-          style="background-color: rebeccapurple"
+          class="col-lg-8 d-flex justify-content-center align-items-center bg-fondo"
         >
+          <div class="olas5"></div>
+          <div class="olas5-responsive"></div>
           <div class="displayer-pedido">
             <div
               style="position: relative; width: 500px; height: 500px"
@@ -199,27 +204,29 @@
               />
               <div style="position: relative">
                 <div class="orders-cesta" id="displayTiendaProductos">
-                  <div class="cesta-contenedor" style="background-color: red">
-                    <div
-                      class="cesta-elemento"
-                      style="background-color: yellow; height: 70px"
-                    >
+                  <div class="cesta-contenedor">
+                    <!-- <div class="cesta-elemento">
                       <div class="cesta-elemento-div1">
-                        <p class="titulo-elemento">Tarta 1</p>
+                        <p class="titulo-elemento">
+                          <span class="white-text">Tarta 1</span>
+                        </p>
                       </div>
                       <div class="cesta-elemento-div2">
                         <a href=""></a>
                         <a href="">Eliminar</a>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="comprar-boton" style="height: 20%">
                     <div class="comprar-boton-1">
-                      <p class="precio-total">Total: $100</p>
+                      <p class="precio-total">
+                        Total: $<span id="precio"></span>
+                      </p>
                     </div>
                     <div class="comprar-boton-2">
                       <button
                         class="mt-3 btn btn-primary boton-order custom-button-pedido no-margin-left disabled"
+                        id="buyButton"
                         disabled
                       >
                         Comprar
@@ -231,10 +238,10 @@
             </div>
           </div>
           <div class="mt-5 order-type" id="orderType">
-            <button class="boton-order-type actual-boton-type" id="Tartas">
+            <button class="boton-order-type actual-boton-type" id="tartas">
               Tarta
             </button>
-            <button class="boton-order-type" id="Muffins">Muffin</button>
+            <button class="boton-order-type" id="muffins">Muffin</button>
           </div>
           <div class="mt-3 order-properties-selector">
             <!-- <img src="" alt="" width="30" height="30" /> -->
@@ -255,8 +262,8 @@
           </div>
           <div class="mt-5 d-flex justify-content-center">
             <button
-              class="mb-5 btn btn-primary boton-order custom-button-pedido no-margin-left disabled"
-              disabled
+              class="mb-5 btn btn-primary boton-order custom-button-pedido no-margin-left"
+              id="botonAgregar"
             >
               <span class="white-text">+ Agregar</span>
             </button>
@@ -299,6 +306,9 @@
         </div>
       </div>
     </div>
+    <!-- STRIPE -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
     <!-- Bootstrap scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

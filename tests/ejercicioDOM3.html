@@ -1,0 +1,62 @@
+<!-- ISMAEL VALENZUELA MAÑAS 30/10/2024
+ENUNCIADO: Confeccionar una página que contenga una lista de tipo <ul> y no defina marcas de tipo <li> inicialmente.
+
+Luego, por medio de la introducción de caracteres en un cuadro de texto (es decir, que no utilices un cuadro de texto tipo number), se agregarán tantas marcas de tipo <li> como se indiquen en ese cuadro de texto, con un contenido aleatorio de 6 caracteres de texto en su interior. 
+
+OJO: Cuando se dice que admite cualquier tipo de carácter, significa que deberéis comprobar que lo que se introduce se puede convertir a número para que se pueda realizar la tarea indicada.
+
+Tras presionar una vez el botón no se podrán agregar más elementos <li> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="inputNumber" placeholder="Introduce un número" />
+    <button id="addButton">Agregar elementos</button>
+    <ul id="list"></ul>
+
+    <script>
+      const d = document;
+      d.addEventListener("DOMContentLoaded", () => {
+        const inputNumber = d.getElementById("inputNumber");
+        const addButton = d.getElementById("addButton");
+        const list = d.getElementById("list");
+
+        addButton.addEventListener("click", () => {
+          const value = inputNumber.value;
+          const number = parseInt(value, 10);
+
+          if (isNaN(number) || number <= 0) {
+            alert("Por favor, introduce un número válido.");
+            return;
+          }
+
+          for (let i = 0; i < number; i++) {
+            const li = d.createElement("li");
+            li.appendChild(
+              d.createTextNode(`${i + 1}. ${generateRandomString(6)}`)
+            );
+            list.appendChild(li);
+          }
+
+          addButton.disabled = true;
+        });
+
+        function generateRandomString(length) {
+          const characters =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+          let result = "";
+          for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            result += characters[randomIndex];
+          }
+          return result;
+        }
+      });
+    </script>
+  </body>
+</html>

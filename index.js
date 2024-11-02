@@ -6,6 +6,10 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+const publicStripeKey = process.env.PUBLIC_STRIPE_KEY;
+const secretStripeKey = process.env.SECRET_STRIPE_KEY;
+const stripe = require("stripe")(secretStripeKey);
+
 const port = process.env.PORT; // Usar el puerto proporcionado por el entorno
 const routes = {};
 
@@ -33,7 +37,7 @@ const anioActual = new Date().getFullYear();
 
 //JSON
 app.get("/api/data", (req, res) => {
-  res.sendFile(path.join(__dirname, "products.json")); 
+  res.sendFile(path.join(__dirname, "products.json"));
 });
 // RUTAS
 app.get(routes.home, (req, res) => {
@@ -56,7 +60,10 @@ app.get(routes.onlineStores, (req, res) => {
   res.render("onlineStores", { anioActual: anioActual });
 });
 app.get(routes.orders, (req, res) => {
-  res.render("orders", { anioActual: anioActual });
+  res.render("orders", {
+    anioActual: anioActual,
+    publicStripeKey: publicStripeKey,
+  });
 });
 // API para enviar el formulario de contacto
 app.post("/Form", async (req, res) => {
@@ -112,6 +119,31 @@ app.post("/Form", async (req, res) => {
     console.error("Error al enviar el correo:", error);
     res.status(500).json({ message: "Error al enviar el correo." });
   }
+});
+
+app.post("/purchase", (req, res) => {
+  let total = 0;
+  req.body.contenido.forEach((element) => {
+    Object.values(element.pedido.Prop).forEach((prop) => {
+      if (prop !== null) {
+        total += 4;
+      }
+    });
+  });
+  stripe.charges
+    .create({
+      amount: total * 100,
+      source: req.body.id,
+      currency: "eur",
+    })
+    .then(() => {
+      console.log("Pago exitoso");
+      res.json({ message: "Pago exitoso" });
+    })
+    .catch(() => {
+      console.log("Pago fallido");
+      res.status(500).end();
+    });
 });
 
 //-----------------

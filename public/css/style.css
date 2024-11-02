@@ -317,6 +317,25 @@ a:hover {
   width: calc(100% + 12px);
   height: 100px;
 }
+.olas5 {
+  background-image: url("/src/SVG/olas5.svg");
+  background-repeat: repeat-y;
+  z-index: 1;
+  position: absolute;
+  right: 0;
+  width: 100px;
+  height: 100%;
+}
+.olas5-responsive {
+  display: none;
+  background-image: url("/src/SVG/olas5-responsive.svg");
+  background-repeat: repeat-x;
+  z-index: 1;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+}
 .container-contactos {
   margin-top: 150px;
 }
@@ -508,6 +527,10 @@ textarea:focus {
 .order-gestor {
   padding-top: 100px;
 }
+.bg-fondo {
+  background-color: var(--pink);
+  position: relative;
+}
 .columnas-order {
   height: 500px;
   display: grid;
@@ -569,10 +592,15 @@ textarea:focus {
   grid-auto-rows: 80px;
   overflow-y: auto;
 }
+.cesta-contenedor div {
+  margin-bottom: 10px;
+}
 .cesta-elemento {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
+  background-color: var(--pink);
+  border-radius: 0.5em;
 }
 .cesta-elemento-div1 {
   padding: 10px;
@@ -580,9 +608,9 @@ textarea:focus {
 }
 .cesta-elemento-div2 {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   align-items: end;
   justify-content: end;
+  padding-right: 10px;
 }
 .comprar-boton {
   display: grid;
@@ -679,6 +707,12 @@ textarea:focus {
     display: none;
   }
   .olas4-responsive {
+    display: block;
+  }
+  .olas5 {
+    display: none;
+  }
+  .olas5-responsive {
     display: block;
   }
   .formulario {
