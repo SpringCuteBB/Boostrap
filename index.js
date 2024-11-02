@@ -8,8 +8,6 @@ dotenv.config();
 
 const publicStripeKey = process.env.PUBLIC_STRIPE_KEY;
 const secretStripeKey = process.env.SECRET_STRIPE_KEY;
-console.log("Public Stripe Key:", publicStripeKey);
-console.log("Secret Stripe Key:", secretStripeKey);
 const stripe = require("stripe")(secretStripeKey);
 
 const port = process.env.PORT; // Usar el puerto proporcionado por el entorno
