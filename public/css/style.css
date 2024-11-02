@@ -654,6 +654,16 @@ textarea:focus {
 }
 /* BARRA DE NAVEGACION */
 @media (max-width: 991px) {
+  .contenedor-pedido-imagenes {
+    width: 350px !important;
+    height: 350px !important;
+    margin-top: 50px;
+    margin-bottom: 100px;
+  }
+  .contenedor-pedido-imagenes img {
+    width: 350px !important;
+    height: 350px !important;
+  }
   .columnas-order {
     grid-template-columns: repeat(2, 1fr);
     margin-right: 0%;
