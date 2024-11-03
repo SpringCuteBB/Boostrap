@@ -95,8 +95,10 @@ window.addEventListener("DOMContentLoaded", async () => {
         displayTiendaProductos.style.display === "none" ||
         displayTiendaProductos.style.display === ""
       ) {
+        iconoTienda.src = "/src/SVG/tienda-icon-selected.svg";
         displayTiendaProductos.style.display = "block";
       } else {
+        iconoTienda.src = "/src/SVG/tienda-icon.svg";
         displayTiendaProductos.style.display = "none";
       }
     });
@@ -379,6 +381,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     };
     //
     botonAgregar.addEventListener("click", () => {
+      iconoTienda.src = "/src/SVG/tienda-icon-selected.svg";
+      displayTiendaProductos.style.display = "block";
       precio = 0;
       const pedidoActual = JSON.parse(JSON.stringify(pedido));
 
@@ -477,5 +481,3 @@ const shakeAnimationCSS = (event) => {
 
   console.log(iconoBoton.classList);
 };
-
-console.log("iconoTienda existe." + iconoTienda);

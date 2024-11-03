@@ -100,7 +100,7 @@ app.post("/Form", async (req, res) => {
   // Configuración del correo
   let mailOptions = {
     from: email,
-    to: "bunbonofficialmail@gmail.com",
+    to: process.env.EMAIL_USER,
     subject: subject,
     html: `
       <h2>Nuevo mensaje de contacto</h2>
