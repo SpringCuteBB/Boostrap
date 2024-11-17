@@ -265,7 +265,7 @@
       aria-labelledby="propertyModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog"  id = "modalDialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="propertyModalLabel">Property Name</h5>
@@ -277,7 +277,6 @@
             ></button>
           </div>
           <div class="modal-body">
-            <!-- Aquí se mostrará el nombre de la propiedad -->
             <p id="propertyModalContent"></p>
           </div>
           <div class="modal-footer">
@@ -292,6 +291,7 @@
         </div>
       </div>
     </div>
+
     <!-- STRIPE -->
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://checkout.stripe.com/checkout.js"></script>

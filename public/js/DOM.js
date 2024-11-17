@@ -217,6 +217,42 @@ window.addEventListener("DOMContentLoaded", async () => {
             const showPropertyDiv = document.createElement("div");
             showPropertyDiv.classList.add("show-property");
             showPropertyDiv.addEventListener("click", () => {
+              const randomId = Math.floor(1 + Math.random() * 8);
+              switch (randomId) {
+                case 1:
+                  document.getElementById("modalDialog").className =
+                    "modal-dialog";
+                  break;
+                case 2:
+                  document.getElementById("modalDialog").className =
+                    "modal-dialog modal-lg";
+                  break;
+                case 3:
+                  document.getElementById("modalDialog").className =
+                    "modal-dialog modal-sm";
+                  break;
+                case 4:
+                  document.getElementById("modalDialog").className =
+                    "modal-dialog modal-dialog-scrollable";
+                  break;
+                case 5:
+                  document.getElementById("modalDialog").className =
+                    "modal-dialog modal-dialog-centered";
+                  break;
+                case 6:
+                  document.getElementById("modalDialog").className =
+                    "modal-dialog modal-fullscreen";
+                  break;
+                case 7:
+                  document.getElementById("modalDialog").className =
+                    "modal-dialog modal-large";
+                  break;
+                case 8:
+                  document.getElementById("modalDialog").className =
+                    "modal-dialog modal-xxl";
+                  break;
+              }
+              console.log(randomId);
               //Click
               document.getElementById("propertyModalLabel").innerText =
                 "SABOR: ";
