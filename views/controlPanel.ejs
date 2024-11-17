@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BunBon</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="shortcut icon" href="/src/favicon.ico" type="image/x-icon" />
+  </head>
+  <body style="overflow-x: hidden">
+    <!-- CONTENIDO -->
+    <section class="section-contactos fade-in">
+      <div class="row vh-100">
+        <div class="ps-lg-5 col-lg-8 container-contactos">
+          <h1 class="text-center text-lg-start">Formulario de Producto</h1>
+          <form
+            class="formulario"
+            id="productForm"
+            enctype="multipart/form-data"
+            action="/addProduct"
+            method="POST"
+          >
+            <div class="mb-3">
+              <label for="productType" class="form-label"
+                >Tipo de Producto</label
+              >
+              <select
+                class="form-select"
+                id="productType"
+                name="productType"
+                required
+              >
+                <option value="" disabled selected>
+                  Selecciona una opción
+                </option>
+                <% Object.keys(products).forEach(productType => { %>
+                <option value="<%= productType %>">
+                  <%= productType.charAt(0).toUpperCase() + productType.slice(1)
+                  %>
+                </option>
+                <% }); %>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="productPart" class="form-label"
+                >Parte del Producto</label
+              >
+              <select
+                class="form-select"
+                id="productPart"
+                name="productPart"
+                required
+                disabled
+              >
+                <option value="" disabled selected>
+                  Selecciona una opción
+                </option>
+              </select>
+            </div>
+            <div class="mb-3" id="productNameContainer" style="display: none">
+              <label for="productName" class="form-label">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="productName"
+                name="productName"
+              />
+            </div>
+            <div class="mb-3" id="productColorContainer" style="display: none">
+              <label for="productColor" class="form-label">Color</label>
+              <input
+                type="color"
+                class="form-control"
+                id="productColor"
+                name="productColor"
+                style="width: 70px !important"
+              />
+            </div>
+            <div class="mb-3" id="productImageContainer" style="display: none">
+              <label for="productImage" class="form-label">Imagen</label>
+              <input
+                type="file"
+                class="form-control"
+                id="productImage"
+                name="productImage"
+                accept="image/*"
+              />
+            </div>
+            <div
+              class="mb-3"
+              id="productImageLayOutContainer"
+              style="display: none"
+            >
+              <label for="productImageLayOut" class="form-label"
+                >Imagen Layout</label
+              >
+              <input
+                type="file"
+                class="form-control"
+                id="productImageLayOut"
+                name="productImageLayOut"
+                accept="image/*"
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary custom-button-contacto disabled"
+              id="submitButton"
+              disabled
+            >
+              Enviar
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bootstrap scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SCRIPTS PROPIOS -->
+    <script src="/js/DOM.js"></script>
+    <script>
+        const products = <%- JSON.stringify(products) %>;
+
+        function hideProductFields() {
+          const productNameContainer = document.getElementById('productNameContainer');
+          const productColorContainer = document.getElementById('productColorContainer');
+          const productImageContainer = document.getElementById('productImageContainer');
+          const productImageLayOutContainer = document.getElementById('productImageLayOutContainer');
+
+          productNameContainer.style.display = 'none';
+          productColorContainer.style.display = 'none';
+          productImageContainer.style.display = 'none';
+          productImageLayOutContainer.style.display = 'none';
+
+          document.getElementById('productName').required = false;
+          document.getElementById('productColor').required = false;
+          document.getElementById('productImage').required = false;
+          document.getElementById('productImageLayOut').required = false;
+        }
+
+        function checkFormCompletion() {
+          const productType = document.getElementById('productType').value;
+          const productPart = document.getElementById('productPart').value;
+          const productName = document.getElementById('productName').value;
+          const productColor = document.getElementById('productColor').value;
+          const productImage = document.getElementById('productImage').value;
+          const productImageLayOut = document.getElementById('productImageLayOut').value;
+          const submitButton = document.getElementById('submitButton');
+
+          const selectedProduct = products[productType] && products[productType][productPart];
+
+          if (selectedProduct) {
+            const isNameRequired = selectedProduct.contenido[0].nombre !== undefined;
+            const isColorRequired = selectedProduct.contenido[0].color !== undefined;
+            const isImageRequired = selectedProduct.contenido[0].imagen !== undefined;
+            const isImageLayOutRequired = selectedProduct.contenido[0].imagenLayout !== undefined;
+
+            document.getElementById('productName').required = isNameRequired;
+            document.getElementById('productColor').required = isColorRequired;
+            document.getElementById('productImage').required = isImageRequired;
+            document.getElementById('productImageLayOut').required = isImageLayOutRequired;
+
+            const isFormComplete = (!isNameRequired || productName) &&
+                                   (!isColorRequired || productColor) &&
+                                   (!isImageRequired || productImage) &&
+                                   (!isImageLayOutRequired || productImageLayOut);
+
+            submitButton.disabled = !isFormComplete;
+            submitButton.classList.toggle('disabled', !isFormComplete);
+          } else {
+            submitButton.disabled = true;
+            submitButton.classList.add('disabled');
+          }
+        }
+
+        document.getElementById('productType').addEventListener('change', function() {
+          const productType = this.value;
+          const productPartSelect = document.getElementById('productPart');
+
+          // Clear previous options
+          productPartSelect.innerHTML = '<option value="" disabled selected>Selecciona una opción</option>';
+
+          if (productType) {
+            // Enable the productPart select
+            productPartSelect.disabled = false;
+
+            // Populate the productPart select with options
+            Object.keys(products[productType]).forEach(productPart => {
+              const option = document.createElement('option');
+              option.value = productPart;
+              option.textContent = productPart.charAt(0).toUpperCase() + productPart.slice(1);
+              productPartSelect.appendChild(option);
+            });
+          } else {
+            // Disable the productPart select if no productType is selected
+            productPartSelect.disabled = true;
+          }
+
+          // Hide product fields when product type changes
+          hideProductFields();
+          checkFormCompletion();
+        });
+
+        document.getElementById('productPart').addEventListener('change', function() {
+          const productPart = this.value;
+          const productType = document.getElementById('productType').value;
+
+          // Show or hide fields based on product part
+          const productNameContainer = document.getElementById('productNameContainer');
+          const productColorContainer = document.getElementById('productColorContainer');
+          const productImageContainer = document.getElementById('productImageContainer');
+          const productImageLayOutContainer = document.getElementById('productImageLayOutContainer');
+
+          if (productType && productPart) {
+            const selectedProduct = products[productType][productPart];
+
+            if (selectedProduct) {
+              productNameContainer.style.display = 'block';
+              productColorContainer.style.display = selectedProduct.contenido[0].color ? 'block' : 'none';
+              productImageContainer.style.display = selectedProduct.contenido[0].imagen ? 'block' : 'none';
+              productImageLayOutContainer.style.display = selectedProduct.contenido[0].imagenLayout ? 'block' : 'none';
+            }
+          } else {
+            hideProductFields();
+          }
+          checkFormCompletion();
+        });
+
+        document.querySelectorAll('.formulario input, .formulario select').forEach(element => {
+          element.addEventListener('input', checkFormCompletion);
+        });
+
+      //   document.getElementById('productForm').addEventListener('submit', function(event) {
+      //     event.preventDefault();
+
+      //     let formData = new FormData(this);
+      //     const jsonData = Object.fromEntries(formData.entries());
+      //     console.log('formData:', jsonData);
+
+
+      //     fetch('/addProduct', {
+      //     method: 'POST',
+      //     body: formData
+      //     })
+      //     .then(data => {
+      //         console.log('suc:', data);
+      //         alert('Formulario enviado con éxito');
+      //     })
+      //     .catch(error => {
+      //         console.error('err:', error);
+      //         alert('Error al enviar el formulario');
+      //     });
+      //   });
+    </script>
+  </body>
+</html>

@@ -3,12 +3,33 @@ const app = express();
 const path = require("path");
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
+const session = require("express-session");
+const multer = require("multer");
+const fs = require("fs");
 
 dotenv.config();
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+const upload = multer({
+  storage: storage,
+  fileFilter: (req, file, cb) => {
+    if (path.extname(file.originalname).toLowerCase() !== ".svg") {
+      return cb(new Error("Only SVG files are allowed"), false);
+    }
+    cb(null, true);
+  },
+});
 const publicStripeKey = process.env.PUBLIC_STRIPE_KEY;
 const secretStripeKey = process.env.SECRET_STRIPE_KEY;
 const stripe = require("stripe")(secretStripeKey);
+const password = process.env.PASSWORD;
 
 const port = process.env.PORT; // Usar el puerto proporcionado por el entorno
 const routes = {};
@@ -18,11 +39,48 @@ app.set("views", path.join(__dirname, "/views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(
+  session({
+    secret: "your_secret_key",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+if (!fs.existsSync("public/uploads")) {
+  fs.mkdirSync("public/uploads", { recursive: true });
+}
 
 app.use((req, res, next) => {
   res.locals.route = (name) => routes[name] || "#";
   next();
 });
+
+// Middleware de autenticación
+function authMiddleware(req, res, next) {
+  if (req.session.authenticated) {
+    return next();
+  } else {
+    res.redirect("/login");
+  }
+}
+// Middleware para manejar la subida de archivos condicionalmente
+const uploadFields = (req, res, next) => {
+  const fields = [
+    { name: "productImage", maxCount: 1 },
+    { name: "productImageLayOut", maxCount: 1 },
+  ];
+
+  const uploadMiddleware = upload.fields(fields);
+  uploadMiddleware(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      return res.status(400).json({ error: err.message });
+    } else if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+    next();
+  });
+};
 
 // AQUI INSERTAR RUTAS
 routes.home = "/";
@@ -32,6 +90,8 @@ routes.contacted = "/contacted";
 routes.physicalStores = "/physical-stores";
 routes.onlineStores = "/online-stores";
 routes.orders = "/orders";
+routes.controlPanel = "/control-panel";
+routes.login = "/login";
 
 const anioActual = new Date().getFullYear();
 
@@ -65,6 +125,97 @@ app.get(routes.orders, (req, res) => {
     publicStripeKey: publicStripeKey,
   });
 });
+app.get(routes.controlPanel, authMiddleware, (req, res) => {
+  fs.readFile(path.join(__dirname, "products.json"), "utf8", (err, data) => {
+    if (err) {
+      console.error("Error reading products.json:", err);
+      return res.status(500).send("Error reading products.json");
+    }
+    const products = JSON.parse(data);
+    res.render("controlPanel", { anioActual: anioActual, products: products });
+  });
+});
+app.get(routes.login, (req, res) => {
+  res.render("login", { anioActual: anioActual });
+});
+
+app.post(routes.login, (req, res) => {
+  const { password: enteredPassword } = req.body;
+  if (enteredPassword === password) {
+    req.session.authenticated = true;
+    res.redirect(routes.controlPanel);
+  } else {
+    res.render("login", {
+      anioActual: anioActual,
+      error: "Contraseña incorrecta",
+    });
+  }
+});
+
+app.post("/addProduct", uploadFields, (req, res) => {
+  console.log(req.body);
+  console.log(req.files);
+
+  const { productType, productPart, productName, productColor } = req.body;
+
+  if (!productType || !productPart || !productName || !req.files.productImage) {
+    return res.status(400).json({ error: "Todos los campos son obligatorios" });
+  }
+
+  if (productPart !== "decoracion" && !productColor) {
+    return res.status(400).json({ error: "El campo color es obligatorio" });
+  }
+
+  const imagePath = `/uploads/${req.files.productImage[0].filename}`;
+  const imageLayOutPath = req.files.productImageLayOut
+    ? `/uploads/${req.files.productImageLayOut[0].filename}`
+    : null;
+
+  console.log(imagePath);
+  console.log(productType, productPart, productName, productColor);
+
+  fs.readFile("products.json", "utf8", (err, data) => {
+    if (err) {
+      console.error("Error al leer el archivo JSON:", err);
+      return res.status(500).json({ error: "Error al leer el archivo JSON" });
+    }
+
+    const products = JSON.parse(data);
+
+    if (products[productType] && products[productType][productPart]) {
+      const newProduct = {
+        nombre: productName,
+        imagen: imagePath,
+      };
+
+      if (productPart === "decoracion") {
+        newProduct.imagenLayout = imageLayOutPath;
+      } else {
+        newProduct.color = productColor;
+      }
+
+      products[productType][productPart].contenido.push(newProduct);
+
+      fs.writeFile(
+        "products.json",
+        JSON.stringify(products, null, 2),
+        (err) => {
+          if (err) {
+            console.error("Error al escribir el archivo JSON:", err);
+            return res
+              .status(500)
+              .json({ error: "Error al escribir el archivo JSON" });
+          }
+
+          res.render("controlPanel", { anioActual: anioActual, products });
+        }
+      );
+    } else {
+      res.status(400).json({ error: "Categoría o subcategoría no encontrada" });
+    }
+  });
+});
+
 // API para enviar el formulario de contacto
 app.post("/Form", async (req, res) => {
   console.log(req.body);
