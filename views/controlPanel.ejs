@@ -184,14 +184,11 @@
           const productType = this.value;
           const productPartSelect = document.getElementById('productPart');
 
-          // Clear previous options
           productPartSelect.innerHTML = '<option value="" disabled selected>Selecciona una opción</option>';
 
           if (productType) {
-            // Enable the productPart select
             productPartSelect.disabled = false;
 
-            // Populate the productPart select with options
             Object.keys(products[productType]).forEach(productPart => {
               const option = document.createElement('option');
               option.value = productPart;
@@ -199,11 +196,9 @@
               productPartSelect.appendChild(option);
             });
           } else {
-            // Disable the productPart select if no productType is selected
             productPartSelect.disabled = true;
           }
 
-          // Hide product fields when product type changes
           hideProductFields();
           checkFormCompletion();
         });
@@ -212,7 +207,6 @@
           const productPart = this.value;
           const productType = document.getElementById('productType').value;
 
-          // Show or hide fields based on product part
           const productNameContainer = document.getElementById('productNameContainer');
           const productColorContainer = document.getElementById('productColorContainer');
           const productImageContainer = document.getElementById('productImageContainer');
@@ -236,28 +230,6 @@
         document.querySelectorAll('.formulario input, .formulario select').forEach(element => {
           element.addEventListener('input', checkFormCompletion);
         });
-
-      //   document.getElementById('productForm').addEventListener('submit', function(event) {
-      //     event.preventDefault();
-
-      //     let formData = new FormData(this);
-      //     const jsonData = Object.fromEntries(formData.entries());
-      //     console.log('formData:', jsonData);
-
-
-      //     fetch('/addProduct', {
-      //     method: 'POST',
-      //     body: formData
-      //     })
-      //     .then(data => {
-      //         console.log('suc:', data);
-      //         alert('Formulario enviado con éxito');
-      //     })
-      //     .catch(error => {
-      //         console.error('err:', error);
-      //         alert('Error al enviar el formulario');
-      //     });
-      //   });
     </script>
   </body>
 </html>
